@@ -108,7 +108,7 @@
             <button onclick="closeSupport()" class="absolute top-8 right-8 text-slate-400 hover:text-slate-900"><i class="fas fa-times text-xl"></i></button>
             <h2 class="text-3xl font-black mb-2 text-slate-900">Support</h2>
             <p class="text-slate-500 mb-8 text-sm">Direct line to a Garuda Advisor</p>
-            <form onsubmit="sendSupport(event)">
+          <form action="submit_support.php" method="POST">
                 <input type="text" id="sName" placeholder="Full Name" required class="w-full p-4 bg-slate-100 rounded-2xl mb-4 outline-none focus:ring-2 ring-amber-500 transition-all">
                 <input type="email" id="sEmail" placeholder="Email Address" required class="w-full p-4 bg-slate-100 rounded-2xl mb-4 outline-none focus:ring-2 ring-amber-500 transition-all">
                 <textarea id="sMessage" placeholder="How can we help?" required rows="4" class="w-full p-4 bg-slate-100 rounded-2xl mb-6 outline-none focus:ring-2 ring-amber-500 transition-all"></textarea>
