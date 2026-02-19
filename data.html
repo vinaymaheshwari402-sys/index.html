@@ -1,59 +1,314 @@
-<div class="max-w-7xl mx-auto px-4 py-10">
-    <button onclick="toggleVault()" class="text-slate-300 text-[10px] hover:text-slate-900 transition">System Logs [daataa]</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garuda | Wealth & Technology</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <div id="master-vault" class="hidden mt-8 bg-white border-2 border-slate-900 rounded-[2rem] overflow-hidden shadow-2xl">
-        <div class="bg-slate-900 p-6 flex justify-between items-center">
-            <h3 class="text-white font-bold tracking-widest uppercase text-sm">Global Identity Registry</h3>
-            <span class="bg-amber-500 text-slate-900 text-[10px] font-bold px-3 py-1 rounded-full">ENCRYPTED LOCAL STORAGE</span>
-        </div>
-        <table class="w-full text-left">
-            <thead class="bg-slate-50 border-b text-[10px] font-black text-slate-400 uppercase">
-                <tr>
-                    <th class="p-6">Registry Key (Username)</th>
-                    <th class="p-6">Access Credential (Password)</th>
-                    <th class="p-6">Status</th>
-                </tr>
-            </thead>
-            <tbody id="vaultTableBody" class="text-sm">
-                </tbody>
-        </table>
-    </div>
-</div>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; scroll-behavior: smooth; }
+        .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .gold-text { color: #c5a059; }
+        .gold-bg { background-color: #c5a059; }
+        #dashboard-view, #support-modal, #logs-modal { display: none; }
+    </style>
+</head>
+<body>
 
-<script>
-    function toggleVault() {
-        const vault = document.getElementById('master-vault');
-        const body = document.getElementById('vaultTableBody');
-        vault.classList.toggle('hidden');
-        
-        // Clear current table
-        body.innerHTML = '';
-        
-        // Loop through everything in LocalStorage
-        for (let i = 0; i < localStorage.length; i++) {
-            const key = localStorage.key(i);
+    <nav class="glass-nav fixed w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="location.reload()">
+                    <div class="w-10 h-10 gold-bg rounded-lg flex items-center justify-center shadow-lg shadow-amber-500/20">
+                        <i class="fas fa-paper-plane text-white"></i>
+                    </div>
+                    <span class="text-2xl font-extrabold tracking-tighter text-slate-900">GARUDA</span>
+                </div>
+
+                <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
+                    <a href="#" class="hover:text-blue-600">Home</a>
+                    <a href="javascript:void(0)" onclick="openSupport()" class="hover:text-blue-600">Support</a>
+                    <a href="javascript:void(0)" onclick="openLogs()" class="text-amber-600 hover:text-amber-700 font-bold">System Logs</a>
+                </div>
+
+                <div class="flex space-x-4">
+                    <button onclick="showAuth('login')" class="px-5 py-2 text-sm font-bold text-slate-700 hover:text-blue-600 transition">Login</button>
+                    <button onclick="showAuth('register')" class="px-6 py-2 text-sm font-bold text-white bg-slate-900 rounded-full hover:bg-slate-800 transition shadow-lg">Join Now</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="landing-view">
+        <section class="hero-gradient pt-48 pb-32 px-4 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-6xl md:text-8xl font-black text-white mb-6 tracking-tight">
+                    Fly Higher with <br><span class="gold-text">Smart Capital</span>
+                </h1>
+                <p class="text-slate-400 text-xl mb-12 max-w-2xl mx-auto">The world's most intuitive platform for wealth management and secure settlements.</p>
+                <button onclick="showAuth('register')" class="gold-bg text-white px-10 py-5 rounded-2xl font-bold hover:scale-105 transition shadow-2xl shadow-amber-500/40 text-lg">
+                    Open Your Portal
+                </button>
+            </div>
+        </section>
+
+        <section class="py-24 bg-white px-4">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="p-8 border rounded-3xl bg-slate-50 hover:border-amber-500 transition-all">
+                    <h3 class="font-bold text-slate-500 text-xs mb-2">TIER 1</h3>
+                    <p class="text-3xl font-black text-slate-900">$500</p>
+                </div>
+                <div class="p-8 border rounded-3xl bg-slate-50 hover:border-amber-500 transition-all">
+                    <h3 class="font-bold text-slate-500 text-xs mb-2">TIER 2</h3>
+                    <p class="text-3xl font-black text-slate-900">$1,000</p>
+                </div>
+                <div class="p-8 border rounded-3xl bg-slate-50 hover:border-amber-500 transition-all">
+                    <h3 class="font-bold text-slate-500 text-xs mb-2">TIER 3</h3>
+                    <p class="text-3xl font-black text-slate-900">$1,500</p>
+                </div>
+                <div class="p-8 border-2 border-slate-900 rounded-3xl bg-white shadow-xl">
+                    <h3 class="font-bold text-amber-600 text-xs mb-2">INSTITUTIONAL</h3>
+                    <p class="text-3xl font-black text-slate-900">$2,000</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="dashboard-view" class="min-h-screen pt-32 bg-slate-50 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="w-full md:w-64">
+                    <div class="bg-slate-900 p-6 rounded-3xl text-white">
+                        <p class="text-[10px] font-bold text-amber-500 uppercase tracking-widest mb-1">Welcome back,</p>
+                        <h4 id="displayUser" class="text-xl font-bold">Admin</h4>
+                        <button onclick="location.reload()" class="mt-6 text-xs text-slate-400 hover:text-white">Exit System</button>
+                    </div>
+                </div>
+
+                <div class="flex-1 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-8 rounded-3xl border shadow-sm">
+                            <p class="text-xs font-bold text-slate-400 uppercase">Global Managed Balance</p>
+                            <h2 id="totalBalance" class="text-4xl font-black text-slate-900 mt-2">$0.00</h2>
+                        </div>
+                        <div class="bg-white p-8 rounded-3xl border flex justify-around">
+                            <button onclick="handleTransaction('deposit')" class="flex flex-col items-center group">
+                                <div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center group-hover:scale-110 transition"><i class="fas fa-plus"></i></div>
+                                <span class="text-xs font-bold mt-2">Deposit</span>
+                            </button>
+                            <button onclick="handleTransaction('withdraw')" class="flex flex-col items-center group">
+                                <div class="w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center group-hover:scale-110 transition"><i class="fas fa-minus"></i></div>
+                                <span class="text-xs font-bold mt-2">Withdraw</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-3xl border shadow-sm overflow-hidden">
+                        <div class="p-6 border-b flex justify-between items-center">
+                            <h3 class="font-bold">Managed Accounts</h3>
+                            <button onclick="openNewClient()" class="gold-bg text-white text-xs font-bold px-4 py-2 rounded-lg">New Client</button>
+                        </div>
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-50 text-[10px] text-slate-400 uppercase font-bold">
+                                <tr><th class="p-6">Client</th><th class="p-6">Initial Tier</th><th class="p-6 text-right">Settled Balance</th></tr>
+                            </thead>
+                            <tbody id="clientTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="auth-modal" class="hidden fixed inset-0 bg-slate-900/95 z-[70] flex items-center justify-center p-4">
+        <div class="bg-white rounded-[2rem] p-10 w-full max-w-md relative">
+            <button onclick="closeAuth()" class="absolute top-8 right-8 text-slate-400"><i class="fas fa-times"></i></button>
+            <div id="auth-content"></div>
+        </div>
+    </div>
+
+    <div id="support-modal" class="fixed inset-0 bg-slate-900/90 z-[70] flex items-center justify-center p-4">
+        <div class="bg-white rounded-[2rem] p-10 w-full max-w-md relative">
+            <button onclick="closeSupport()" class="absolute top-8 right-8 text-slate-400"><i class="fas fa-times"></i></button>
+            <h2 class="text-3xl font-black mb-2">Support Portal</h2>
+            <p class="text-slate-500 mb-6 text-sm">Enter your details to reach an advisor.</p>
+            <form onsubmit="sendSupport(event)">
+                <input type="text" id="sName" placeholder="Full Name" required class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
+                <input type="email" id="sEmail" placeholder="Email Address" required class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
+                <textarea id="sMessage" placeholder="Message" required rows="3" class="w-full p-4 bg-slate-100 rounded-2xl mb-6 outline-none"></textarea>
+                <button type="submit" class="w-full py-4 gold-bg text-white font-bold rounded-2xl">Submit Ticket</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="logs-modal" class="fixed inset-0 bg-slate-900/95 z-[80] flex items-center justify-center p-4">
+        <div class="bg-white rounded-[2rem] p-10 w-full max-w-5xl relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeLogs()" class="absolute top-8 right-8 text-slate-400"><i class="fas fa-times"></i></button>
+            <h2 class="text-3xl font-black mb-6">System Logs</h2>
             
-            // Look for keys that start with your registration prefix
-            if (key.startsWith('garuda_u_')) {
-                const username = key.replace('garuda_u_', '');
-                const password = localStorage.getItem(key);
-                
-                body.innerHTML += `
-                    <tr class="border-b hover:bg-slate-50">
-                        <td class="p-6 font-bold text-slate-900">
-                            <i class="fas fa-user-shield mr-2 text-amber-500"></i>${username}
-                        </td>
-                        <td class="p-6 font-mono text-blue-600 font-bold">${password}</td>
-                        <td class="p-6">
-                            <span class="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded-md font-bold">ACTIVE</span>
-                        </td>
-                    </tr>
-                `;
+            <div class="space-y-8">
+                <div>
+                    <h3 class="text-xs font-bold text-amber-600 uppercase mb-4 tracking-widest">Recent Support Tickets</h3>
+                    <table class="w-full text-left text-sm border-collapse">
+                        <thead class="bg-slate-100 text-[10px] text-slate-500 uppercase">
+                            <tr><th class="p-4 rounded-l-lg">Date</th><th>Name</th><th>Email</th><th class="p-4 rounded-r-lg">Message</th></tr>
+                        </thead>
+                        <tbody id="logs-table-body"></tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <h3 class="text-xs font-bold text-blue-600 uppercase mb-4 tracking-widest">Registered User Registry</h3>
+                    <table class="w-full text-left text-sm border-collapse">
+                        <thead class="bg-slate-100 text-[10px] text-slate-500 uppercase">
+                            <tr><th class="p-4 rounded-l-lg">User</th><th>Phone/ID</th><th class="p-4 rounded-r-lg">Status</th></tr>
+                        </thead>
+                        <tbody id="registry-table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <button onclick="clearAllData()" class="mt-8 text-red-600 text-xs font-bold hover:underline">WIPE ALL SYSTEM DATA</button>
+        </div>
+    </div>
+
+    <script>
+        let clients = JSON.parse(localStorage.getItem('garuda_clients')) || [];
+        let generatedOTP = null;
+
+        // AUTH LOGIC
+        function showAuth(type) {
+            document.getElementById('auth-modal').classList.remove('hidden');
+            const content = document.getElementById('auth-content');
+            if(type === 'login') {
+                content.innerHTML = `<h2 class="text-3xl font-black mb-2">Login</h2><p class="text-slate-500 mb-6 text-sm">Access your portal</p>
+                <input type="tel" id="lPhone" placeholder="Mobile Number" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none font-bold">
+                <input type="password" id="lPass" placeholder="Password" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
+                <div id="otp-box" class="hidden">
+                    <p class="text-[10px] font-bold text-amber-600 mb-2 uppercase">Code Sent</p>
+                    <input type="text" id="lOtp" placeholder="000000" class="w-full p-4 bg-amber-50 border-2 border-amber-200 rounded-2xl mb-6 text-center text-xl font-black">
+                </div>
+                <button id="auth-btn" onclick="sendOTP('login')" class="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl">Get Access Code</button>`;
+            } else {
+                content.innerHTML = `<h2 class="text-3xl font-black mb-2">Join Garuda</h2><p class="text-slate-500 mb-6 text-sm">Secure your wealth</p>
+                <input type="text" id="rUser" placeholder="Full Name" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
+                <input type="tel" id="rPhone" placeholder="Mobile" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
+                <input type="password" id="rPass" placeholder="Password" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
+                <div id="otp-box-reg" class="hidden">
+                    <input type="text" id="rOtp" placeholder="000000" class="w-full p-4 bg-amber-50 border-2 border-amber-200 rounded-2xl mb-6 text-center text-xl font-black">
+                </div>
+                <button id="reg-btn" onclick="sendOTP('register')" class="w-full py-4 gold-bg text-white font-bold rounded-2xl">Verify Mobile</button>`;
             }
         }
-        
-        if(body.innerHTML === '') {
-            body.innerHTML = '<tr><td colspan="3" class="p-10 text-center text-slate-400 italic">No identities registered in this browser yet.</td></tr>';
+        function closeAuth() { document.getElementById('auth-modal').classList.add('hidden'); }
+
+        function sendOTP(mode) {
+            generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
+            alert("GARUDA SECURITY: Your code is " + generatedOTP);
+            if(mode === 'login') {
+                document.getElementById('otp-box').classList.remove('hidden');
+                document.getElementById('auth-btn').innerText = "Authorize Login";
+                document.getElementById('auth-btn').onclick = login;
+            } else {
+                document.getElementById('otp-box-reg').classList.remove('hidden');
+                document.getElementById('reg-btn').innerText = "Complete Registration";
+                document.getElementById('reg-btn').onclick = register;
+            }
         }
-    }
-</script>
+
+        function register() {
+            const u = document.getElementById('rUser').value, ph = document.getElementById('rPhone').value, p = document.getElementById('rPass').value, otp = document.getElementById('rOtp').value;
+            if(otp !== generatedOTP) return alert("Invalid OTP");
+            localStorage.setItem(`garuda_ph_${ph}`, JSON.stringify({name: u, pass: p}));
+            alert("Registration Complete!");
+            showAuth('login');
+        }
+
+        function login() {
+            const ph = document.getElementById('lPhone').value, p = document.getElementById('lPass').value, otp = document.getElementById('lOtp').value;
+            const data = JSON.parse(localStorage.getItem(`garuda_ph_${ph}`));
+            if(data && data.pass === p && otp === generatedOTP) {
+                document.getElementById('landing-view').style.display = 'none';
+                document.getElementById('dashboard-view').style.display = 'block';
+                document.getElementById('displayUser').innerText = data.name;
+                closeAuth();
+                render();
+            } else { alert("Access Denied"); }
+        }
+
+        // SUPPORT LOGIC
+        function openSupport() { document.getElementById('support-modal').style.display = 'flex'; }
+        function closeSupport() { document.getElementById('support-modal').style.display = 'none'; }
+        function sendSupport(e) {
+            e.preventDefault();
+            const ticket = { name: document.getElementById('sName').value, email: document.getElementById('sEmail').value, message: document.getElementById('sMessage').value, date: new Date().toLocaleString() };
+            let logs = JSON.parse(localStorage.getItem('garuda_support_logs')) || [];
+            logs.push(ticket);
+            localStorage.setItem('garuda_support_logs', JSON.stringify(logs));
+            alert("Ticket logged. Thank you.");
+            closeSupport();
+        }
+
+        // LOGS LOGIC
+        function openLogs() { 
+            document.getElementById('logs-modal').style.display = 'flex'; 
+            renderLogsTable();
+        }
+        function closeLogs() { document.getElementById('logs-modal').style.display = 'none'; }
+        function renderLogsTable() {
+            const tBody = document.getElementById('logs-table-body');
+            const rBody = document.getElementById('registry-table-body');
+            const logs = JSON.parse(localStorage.getItem('garuda_support_logs')) || [];
+            
+            tBody.innerHTML = logs.length ? '' : '<tr><td colspan="4" class="p-4 text-slate-400">No tickets found</td></tr>';
+            logs.forEach(l => {
+                tBody.innerHTML += `<tr class="border-b"><td class="p-4 font-mono text-[10px]">${l.date}</td><td class="p-4 font-bold">${l.name}</td><td class="p-4">${l.email}</td><td class="p-4 text-slate-500">${l.message}</td></tr>`;
+            });
+
+            rBody.innerHTML = '';
+            for(let i=0; i<localStorage.length; i++) {
+                let key = localStorage.key(i);
+                if(key.startsWith('garuda_ph_')) {
+                    let d = JSON.parse(localStorage.getItem(key));
+                    rBody.innerHTML += `<tr class="border-b"><td class="p-4 font-bold">${d.name}</td><td class="p-4 font-mono text-blue-600">${key.split('_')[2]}</td><td class="p-4"><span class="bg-green-100 text-green-700 px-2 py-1 rounded-full text-[10px] font-bold">ACTIVE</span></td></tr>`;
+                }
+            }
+        }
+
+        function clearAllData() { if(confirm("Clear ALL data?")) { localStorage.clear(); location.reload(); } }
+
+        // DASHBOARD ACTIONS
+        function openNewClient() {
+            const name = prompt("Client Name:"), tier = prompt("Tier (500, 1000, 1500, 2000):");
+            if(name && [500, 1000, 1500, 2000].includes(parseInt(tier))) {
+                clients.push({id: Date.now(), name, balance: parseInt(tier), tier});
+                localStorage.setItem('garuda_clients', JSON.stringify(clients));
+                render();
+            }
+        }
+
+        function handleTransaction(type) {
+            const amt = parseFloat(prompt(`Enter ${type} amount:`));
+            if(!isNaN(amt) && clients.length) {
+                clients[0].balance += (type === 'deposit' ? amt : -amt);
+                localStorage.setItem('garuda_clients', JSON.stringify(clients));
+                render();
+            }
+        }
+
+        function render() {
+            const b = document.getElementById('clientTableBody');
+            let total = 0; b.innerHTML = '';
+            clients.forEach(c => {
+                total += c.balance;
+                b.innerHTML += `<tr class="border-t"><td class="p-6 font-bold text-slate-800">${c.name}</td><td class="p-6 text-slate-500 font-bold text-xs">$${c.tier}</td><td class="p-6 text-right font-black text-blue-600">$${c.balance.toLocaleString()}</td></tr>`;
+            });
+            document.getElementById('totalBalance').innerText = `$${total.toLocaleString()}`;
+        }
+    </script>
+</body>
+</html>
