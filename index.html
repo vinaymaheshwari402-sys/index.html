@@ -7,176 +7,139 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="manifest" href="manifest.json">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; overflow-x: hidden; }
         .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
-        .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
         .gold-text { color: #c5a059; }
         .gold-bg { background-color: #c5a059; }
-        .logo-container { display: flex; align-items: center; gap: 10px; }
-        #dashboard-view { display: none; }
+        /* Resetting any hardcoded hides to let JS control them */
+        #dashboard-view, #support-modal, #logs-modal, #auth-modal { display: none; }
     </style>
 </head>
 <body>
 
-    <nav class="glass-nav fixed w-full z-50 transition-all duration-300">
+    <nav class="bg-white/90 backdrop-blur-xl fixed w-full z-[100] border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
-                <div class="logo-container">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="location.reload()">
                     <div class="w-10 h-10 gold-bg rounded-lg flex items-center justify-center shadow-lg shadow-amber-500/20">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white">
-                            <path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z" fill="currentColor" opacity="0.3"/>
-                            <path d="M11 8H13V10H14C14.55 10 15 10.45 15 11V13C15 13.55 14.55 14 14 14H11V15H15V17H13V19H11V17H10C9.45 17 9 16.55 9 16V14C9 13.45 9.45 13 10 13H13V12H9V10H11V8Z" fill="white"/>
-                        </svg>
+                        <i class="fas fa-paper-plane text-white"></i>
                     </div>
-                    <span class="text-2xl font-extrabold tracking-tighter text-slate-900">GARUDA</span>
+                    <span class="text-2xl font-black tracking-tighter text-slate-900 uppercase">Garuda</span>
                 </div>
 
-                <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
+                <div class="hidden md:flex space-x-8 text-sm font-bold text-slate-600">
                     <a href="#" class="hover:text-blue-600">Home</a>
-                    <a href="#tiers" class="hover:text-blue-600">Accounts</a>
-                    <a href="#contact" class="hover:text-blue-600">Support</a>
+                    <button onclick="openSupport()" class="hover:text-blue-600 transition-colors">Support</button>
+                    <button onclick="openLogs()" class="text-amber-600 hover:text-amber-700">System Logs</button>
                 </div>
+
                 <div class="flex space-x-4">
-                    <button onclick="showAuth('login')" class="px-5 py-2 text-sm font-bold text-slate-700 hover:text-blue-600 transition">Login</button>
-                    <button onclick="showAuth('register')" class="px-6 py-2 text-sm font-bold text-white bg-slate-900 rounded-full hover:bg-slate-800 transition shadow-lg">Join Now</button>
+                    <button onclick="showAuth('login')" class="px-5 py-2 text-sm font-bold text-slate-700">Login</button>
+                    <button onclick="showAuth('register')" class="px-6 py-2 text-sm font-bold text-white bg-slate-900 rounded-full shadow-lg hover:bg-slate-800 transition">Join Now</button>
                 </div>
             </div>
         </div>
     </nav>
 
     <div id="landing-view">
-        <section class="hero-gradient pt-48 pb-32 px-4 text-center">
+        <section class="hero-gradient pt-52 pb-32 px-4 text-center">
             <div class="max-w-4xl mx-auto">
-                <div class="inline-flex items-center space-x-2 bg-white/10 p-1 pr-4 rounded-full text-blue-300 text-xs font-bold mb-6">
-                    <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-[10px]">NEW</span>
-                    <span>Experience the Garuda $2,000 Platinum Tier</span>
-                </div>
                 <h1 class="text-6xl md:text-8xl font-black text-white mb-6 tracking-tight">
                     Fly Higher with <br><span class="gold-text">Smart Capital</span>
                 </h1>
-                <p class="text-slate-400 text-xl mb-12 max-w-2xl mx-auto">The world's most intuitive platform for client account management and secure dollar settlements.</p>
+                <p class="text-slate-400 text-xl mb-12 max-w-2xl mx-auto">Premium institutional wealth management and secure digital settlements.</p>
                 <button onclick="showAuth('register')" class="gold-bg text-white px-10 py-5 rounded-2xl font-bold hover:scale-105 transition shadow-2xl shadow-amber-500/40 text-lg">
-                    Open Your Portal
+                    Start Your Journey
                 </button>
             </div>
         </section>
-
-        <section id="tiers" class="py-24 bg-white px-4">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="p-8 border rounded-3xl bg-slate-50 hover:border-amber-500 transition-all cursor-pointer group">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors">
-                        <i class="fas fa-dollar-sign text-amber-600 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Tier 1</h3>
-                    <p class="text-3xl font-black text-slate-900 mb-4">$500</p>
-                    <p class="text-sm text-slate-500">Perfect for retail entry and basic settlements.</p>
-                </div>
-                <div class="p-8 border rounded-3xl bg-slate-50 hover:border-amber-500 transition-all cursor-pointer group">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors">
-                        <i class="fas fa-coins text-amber-600 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Tier 2</h3>
-                    <p class="text-3xl font-black text-slate-900 mb-4">$1,000</p>
-                    <p class="text-sm text-slate-500">Enhanced liquidity and reporting features.</p>
-                </div>
-                <div class="p-8 border rounded-3xl bg-slate-50 hover:border-amber-500 transition-all cursor-pointer group">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors">
-                        <i class="fas fa-briefcase text-amber-600 group-hover:text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">Tier 3</h3>
-                    <p class="text-3xl font-black text-slate-900 mb-4">$1,500</p>
-                    <p class="text-sm text-slate-500">Priority support and multi-client access.</p>
-                </div>
-                <div class="p-8 border-2 border-slate-900 rounded-3xl bg-white shadow-2xl relative">
-                    <span class="absolute -top-3 left-8 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full">INSTITUTIONAL</span>
-                    <div class="w-12 h-12 bg-amber-500 rounded-xl shadow-sm flex items-center justify-center mb-6">
-                        <i class="fas fa-vault text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2 text-slate-900">Tier 4</h3>
-                    <p class="text-3xl font-black text-slate-900 mb-4">$2,000</p>
-                    <p class="text-sm text-slate-500">Maximum limits and dedicated wealth advisor.</p>
-                </div>
-            </div>
-        </section>
     </div>
 
-    <div id="auth-modal" class="hidden fixed inset-0 bg-slate-900/90 z-[60] flex items-center justify-center p-4">
-        <div class="bg-white rounded-[2rem] p-10 w-full max-w-md shadow-2xl relative">
-            <button onclick="closeAuth()" class="absolute top-8 right-8 text-slate-400 hover:text-slate-900"><i class="fas fa-times"></i></button>
-            <div id="auth-content"></div>
+    <div id="dashboard-view" class="min-h-screen pt-32 bg-slate-50 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-1">
+                    <div class="bg-slate-900 p-8 rounded-[2rem] text-white shadow-2xl">
+                        <p class="text-[10px] font-bold text-amber-500 uppercase tracking-widest mb-2">Access Portal</p>
+                        <h4 id="displayUser" class="text-2xl font-bold">Client</h4>
+                        <hr class="my-6 border-slate-800">
+                        <button onclick="location.reload()" class="text-xs text-slate-400 hover:text-white transition">Sign Out Securely</button>
+                    </div>
+                </div>
+                <div class="md:col-span-3 space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white p-8 rounded-[2rem] border shadow-sm">
+                            <p class="text-xs font-bold text-slate-400 uppercase">Available Settlement</p>
+                            <h2 id="totalBalance" class="text-5xl font-black text-slate-900 mt-2">$0.00</h2>
+                        </div>
+                        <div class="bg-white p-8 rounded-[2rem] border flex justify-around items-center shadow-sm">
+                            <button onclick="handleTransaction('deposit')" class="flex flex-col items-center group">
+                                <div class="w-14 h-14 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition"><i class="fas fa-arrow-down"></i></div>
+                                <span class="text-xs font-bold mt-3 uppercase">Deposit</span>
+                            </button>
+                            <button onclick="handleTransaction('withdraw')" class="flex flex-col items-center group">
+                                <div class="w-14 h-14 bg-rose-500 text-white rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition"><i class="fas fa-arrow-up"></i></div>
+                                <span class="text-xs font-bold mt-3 uppercase">Withdraw</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div id="dashboard-view" class="min-h-screen pt-32 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row gap-8">
-                <div class="w-full md:w-64 space-y-4">
-                    <div class="bg-slate-900 p-6 rounded-3xl text-white text-center">
-                        <p class="text-[10px] font-bold text-amber-500 tracking-widest uppercase mb-1">Access Level</p>
-                        <h4 id="displayUser" class="text-xl font-bold">Admin</h4>
-                        <button onclick="location.reload()" class="mt-6 text-xs text-slate-400 hover:text-white">Log Out System</button>
+    <div id="support-modal" class="fixed inset-0 bg-slate-900/90 z-[200] items-center justify-center p-4">
+        <div class="bg-white rounded-[2.5rem] p-10 w-full max-w-md relative shadow-2xl">
+            <button onclick="closeSupport()" class="absolute top-8 right-8 text-slate-300 hover:text-slate-900 transition"><i class="fas fa-times text-2xl"></i></button>
+            <h2 class="text-3xl font-black mb-2 text-slate-900">Support</h2>
+            <p class="text-slate-500 mb-8 text-sm font-medium">Your request will be routed to a wealth advisor.</p>
+            <form onsubmit="sendSupport(event)">
+                <input type="text" id="sName" placeholder="Full Name" required class="w-full p-4 bg-slate-50 rounded-2xl mb-4 border border-slate-100 outline-none focus:border-amber-500 transition">
+                <input type="email" id="sEmail" placeholder="Email Address" required class="w-full p-4 bg-slate-50 rounded-2xl mb-4 border border-slate-100 outline-none focus:border-amber-500 transition">
+                <textarea id="sMessage" placeholder="Describe your inquiry..." required rows="4" class="w-full p-4 bg-slate-50 rounded-2xl mb-8 border border-slate-100 outline-none focus:border-amber-500 transition"></textarea>
+                <button type="submit" class="w-full py-5 gold-bg text-white font-bold rounded-2xl shadow-xl shadow-amber-500/20 hover:brightness-110 transition uppercase tracking-widest">Submit Inquiry</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="logs-modal" class="fixed inset-0 bg-slate-900/95 z-[300] items-center justify-center p-4">
+        <div class="bg-white rounded-[3rem] p-12 w-full max-w-6xl relative max-h-[85vh] overflow-y-auto">
+            <button onclick="closeLogs()" class="absolute top-10 right-10 text-slate-300 hover:text-slate-900"><i class="fas fa-times text-3xl"></i></button>
+            <h2 class="text-4xl font-black mb-10 text-slate-900">System Registry</h2>
+            <div class="grid grid-cols-1 gap-12">
+                <div>
+                    <h3 class="text-xs font-black text-amber-600 uppercase mb-6 tracking-[0.2em]">Support Tickets</h3>
+                    <div class="overflow-hidden border border-slate-100 rounded-3xl">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-50 text-[10px] text-slate-400 font-bold uppercase">
+                                <tr><th class="p-6">Timestamp</th><th class="p-6">Client</th><th class="p-6">Email</th><th class="p-6">Message</th></tr>
+                            </thead>
+                            <tbody id="logs-table-body" class="text-sm divide-y divide-slate-50"></tbody>
+                        </table>
                     </div>
                 </div>
-
-                <div class="flex-1 space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div class="bg-white p-8 rounded-3xl border shadow-sm">
-                            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Global Managed Balance</p>
-                            <h2 id="totalBalance" class="text-4xl font-black text-slate-900 mt-2">$0.00</h2>
-                        </div>
-                        <div class="bg-white p-8 rounded-3xl border flex items-center justify-around">
-                             <button onclick="handleTransaction('deposit')" class="flex flex-col items-center">
-                                <div class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center shadow-lg"><i class="fas fa-plus"></i></div>
-                                <span class="text-xs font-bold mt-2">Deposit</span>
-                             </button>
-                             <button onclick="handleTransaction('withdraw')" class="flex flex-col items-center">
-                                <div class="w-12 h-12 bg-red-500 text-white rounded-full flex items-center justify-center shadow-lg"><i class="fas fa-minus"></i></div>
-                                <span class="text-xs font-bold mt-2">Withdraw</span>
-                             </button>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-3xl border shadow-sm overflow-hidden">
-                        <div class="p-6 border-b flex justify-between items-center">
-                            <h3 class="font-bold">Managed Accounts</h3>
-                            <button onclick="openNewClient()" class="gold-bg text-white text-xs font-bold px-4 py-2 rounded-lg">New Client</button>
-                        </div>
-                        <table class="w-full">
-                            <thead class="bg-slate-50 text-[10px] uppercase font-bold text-slate-400">
-                                <tr>
-                                    <th class="p-6 text-left">Client</th>
-                                    <th class="p-6 text-left">Initial Tier</th>
-                                    <th class="p-6 text-right">Settled Balance</th>
-                                </tr>
+                <div>
+                    <h3 class="text-xs font-black text-blue-600 uppercase mb-6 tracking-[0.2em]">Member Database</h3>
+                    <div class="overflow-hidden border border-slate-100 rounded-3xl">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-50 text-[10px] text-slate-400 font-bold uppercase">
+                                <tr><th class="p-6">Username</th><th class="p-6">Identifier</th><th class="p-6">Status</th></tr>
                             </thead>
-                            <tbody id="clientTableBody"></tbody>
+                            <tbody id="registry-table-body" class="text-sm divide-y divide-slate-50"></tbody>
                         </table>
                     </div>
                 </div>
             </div>
+            <button onclick="clearAllData()" class="mt-12 text-rose-500 text-xs font-black uppercase tracking-widest hover:underline">Clear Global Database</button>
         </div>
     </div>
 
-    <div class="max-w-7xl mx-auto px-4 py-10 mt-20 border-t">
-        <button onclick="toggleVault()" class="text-slate-300 text-[10px] hover:text-slate-900 transition">System Logs [daataa]</button>
-        <div id="master-vault" class="hidden mt-8 bg-white border-2 border-slate-900 rounded-[2rem] overflow-hidden shadow-2xl">
-            <div class="bg-slate-900 p-6 flex justify-between items-center">
-                <h3 class="text-white font-bold tracking-widest uppercase text-sm">Global Identity Registry</h3>
-                <span class="bg-amber-500 text-slate-900 text-[10px] font-bold px-3 py-1 rounded-full">SECURE LOCAL DB</span>
-            </div>
-            <table class="w-full text-left">
-                <thead class="bg-slate-50 border-b text-[10px] font-black text-slate-400 uppercase">
-                    <tr>
-                        <th class="p-6">Name</th>
-                        <th class="p-6">Mobile Number</th>
-                        <th class="p-6">Status</th>
-                    </tr>
-                </thead>
-                <tbody id="vaultTableBody" class="text-sm"></tbody>
-            </table>
+    <div id="auth-modal" class="fixed inset-0 bg-slate-900/95 z-[400] items-center justify-center p-4">
+        <div class="bg-white rounded-[2.5rem] p-12 w-full max-w-md relative shadow-2xl">
+            <button onclick="closeAuth()" class="absolute top-8 right-8 text-slate-300 hover:text-slate-900"><i class="fas fa-times text-2xl"></i></button>
+            <div id="auth-content"></div>
         </div>
     </div>
 
@@ -184,47 +147,55 @@
         let clients = JSON.parse(localStorage.getItem('garuda_clients')) || [];
         let generatedOTP = null;
 
+        // THE FIX: Explicitly setting display style to 'flex' and 'none'
+        function openSupport() {
+            const modal = document.getElementById('support-modal');
+            modal.style.display = 'flex';
+            console.log("Support Modal Opened");
+        }
+
+        function closeSupport() {
+            document.getElementById('support-modal').style.display = 'none';
+        }
+
+        function openLogs() {
+            document.getElementById('logs-modal').style.display = 'flex';
+            renderLogsTable();
+        }
+
+        function closeLogs() {
+            document.getElementById('logs-modal').style.display = 'none';
+        }
+
+        // --- AUTH FUNCTIONS ---
         function showAuth(type) {
             const modal = document.getElementById('auth-modal');
+            modal.style.display = 'flex';
             const content = document.getElementById('auth-content');
-            modal.classList.remove('hidden');
-
             if(type === 'login') {
-                content.innerHTML = `
-                    <h2 class="text-3xl font-black mb-2">Login</h2>
-                    <p class="text-slate-500 mb-6 text-sm">Access your secure portal</p>
-                    <input type="tel" id="lPhone" placeholder="Mobile Number" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none font-bold">
-                    <input type="password" id="lPass" placeholder="Password" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
-                    <div id="otp-box" class="hidden">
-                        <p class="text-[10px] font-bold text-amber-600 mb-2 px-2 uppercase tracking-widest">Verification Code Sent</p>
-                        <input type="text" id="lOtp" placeholder="000000" class="w-full p-4 bg-amber-50 border-2 border-amber-200 rounded-2xl mb-6 outline-none text-center tracking-[0.5em] font-black text-xl">
-                    </div>
-                    <button id="auth-btn" onclick="sendOTP('login')" class="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl">Get Access Code</button>`;
+                content.innerHTML = `<h2 class="text-4xl font-black mb-2 text-slate-900">Login</h2><p class="text-slate-400 mb-8 font-medium">Enter your credentials.</p>
+                <input type="tel" id="lPhone" placeholder="Mobile" class="w-full p-5 bg-slate-50 rounded-2xl mb-4 border border-slate-100 outline-none">
+                <input type="password" id="lPass" placeholder="Password" class="w-full p-5 bg-slate-50 rounded-2xl mb-4 border border-slate-100 outline-none">
+                <div id="otp-box" class="hidden"><input type="text" id="lOtp" placeholder="000000" class="w-full p-5 bg-amber-50 border-2 border-amber-200 rounded-2xl mb-6 text-center text-2xl font-black tracking-widest"></div>
+                <button id="auth-btn" onclick="sendOTP('login')" class="w-full py-5 bg-slate-900 text-white font-bold rounded-2xl shadow-xl">Get Access Code</button>`;
             } else {
-                content.innerHTML = `
-                    <h2 class="text-3xl font-black mb-2">Join Garuda</h2>
-                    <p class="text-slate-500 mb-6 text-sm">Secure your wealth with mobile identity</p>
-                    <input type="text" id="rUser" placeholder="Full Name" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
-                    <input type="tel" id="rPhone" placeholder="Mobile Number" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none font-bold">
-                    <input type="password" id="rPass" placeholder="Create Password" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
-                    <div id="otp-box-reg" class="hidden">
-                        <p class="text-[10px] font-bold text-amber-600 mb-2 px-2 uppercase tracking-widest">Verification Code Sent</p>
-                        <input type="text" id="rOtp" placeholder="000000" class="w-full p-4 bg-amber-50 border-2 border-amber-200 rounded-2xl mb-6 outline-none text-center tracking-[0.5em] font-black text-xl">
-                    </div>
-                    <button id="reg-btn" onclick="sendOTP('register')" class="w-full py-4 gold-bg text-white font-bold rounded-2xl shadow-lg">Verify Mobile</button>`;
+                content.innerHTML = `<h2 class="text-4xl font-black mb-2 text-slate-900">Join</h2><p class="text-slate-400 mb-8 font-medium">Create institutional account.</p>
+                <input type="text" id="rUser" placeholder="Full Name" class="w-full p-5 bg-slate-50 rounded-2xl mb-4 border border-slate-100">
+                <input type="tel" id="rPhone" placeholder="Mobile" class="w-full p-5 bg-slate-50 rounded-2xl mb-4 border border-slate-100">
+                <input type="password" id="rPass" placeholder="Password" class="w-full p-5 bg-slate-50 rounded-2xl mb-4 border border-slate-100">
+                <div id="otp-box-reg" class="hidden"><input type="text" id="rOtp" placeholder="000000" class="w-full p-5 bg-amber-50 border-2 border-amber-200 rounded-2xl mb-6 text-center text-2xl font-black tracking-widest"></div>
+                <button id="reg-btn" onclick="sendOTP('register')" class="w-full py-5 gold-bg text-white font-bold rounded-2xl shadow-xl">Verify Mobile</button>`;
             }
         }
 
+        function closeAuth() { document.getElementById('auth-modal').style.display = 'none'; }
+
         function sendOTP(mode) {
-            const phone = (mode === 'login') ? document.getElementById('lPhone').value : document.getElementById('rPhone').value;
-            if(!phone || phone.length < 8) return alert("Please enter valid mobile number");
-
             generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-            alert("GARUDA SECURITY: Your verification code is " + generatedOTP);
-
+            alert("GARUDA SECURE CODE: " + generatedOTP);
             if(mode === 'login') {
                 document.getElementById('otp-box').classList.remove('hidden');
-                document.getElementById('auth-btn').innerText = "Authorize Login";
+                document.getElementById('auth-btn').innerText = "Confirm Identity";
                 document.getElementById('auth-btn').onclick = login;
             } else {
                 document.getElementById('otp-box-reg').classList.remove('hidden');
@@ -233,91 +204,62 @@
             }
         }
 
-        function closeAuth() { document.getElementById('auth-modal').classList.add('hidden'); }
-
         function register() {
-            const u = document.getElementById('rUser').value;
-            const ph = document.getElementById('rPhone').value;
-            const p = document.getElementById('rPass').value;
-            const otp = document.getElementById('rOtp').value;
-
-            if(otp !== generatedOTP) return alert("Invalid OTP");
-            
-            // Save user linked to phone number
+            const u = document.getElementById('rUser').value, ph = document.getElementById('rPhone').value, p = document.getElementById('rPass').value, otp = document.getElementById('rOtp').value;
+            if(otp !== generatedOTP) return alert("Security Check Failed");
             localStorage.setItem(`garuda_ph_${ph}`, JSON.stringify({name: u, pass: p}));
-            alert("Registered! Now Login.");
+            alert("Identity Secured. Please Login.");
             showAuth('login');
         }
 
         function login() {
-            const ph = document.getElementById('lPhone').value;
-            const p = document.getElementById('lPass').value;
-            const otp = document.getElementById('lOtp').value;
-            const savedData = JSON.parse(localStorage.getItem(`garuda_ph_${ph}`));
-
-            if(savedData && savedData.pass === p) {
-                if(otp !== generatedOTP) return alert("Invalid OTP");
+            const ph = document.getElementById('lPhone').value, p = document.getElementById('lPass').value, otp = document.getElementById('lOtp').value;
+            const data = JSON.parse(localStorage.getItem(`garuda_ph_${ph}`));
+            if(data && data.pass === p && otp === generatedOTP) {
                 document.getElementById('landing-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
-                document.getElementById('displayUser').innerText = savedData.name;
+                document.getElementById('displayUser').innerText = data.name;
                 closeAuth();
                 render();
-            } else { alert("Access Denied"); }
+            } else { alert("Unauthorized Access"); }
         }
 
-        function toggleVault() {
-            const v = document.getElementById('master-vault');
-            const b = document.getElementById('vaultTableBody');
-            v.classList.toggle('hidden');
-            b.innerHTML = '';
-            for (let i = 0; i < localStorage.length; i++){
+        // --- SUPPORT DATA ---
+        function sendSupport(e) {
+            e.preventDefault();
+            const ticket = { name: document.getElementById('sName').value, email: document.getElementById('sEmail').value, message: document.getElementById('sMessage').value, date: new Date().toLocaleString() };
+            let logs = JSON.parse(localStorage.getItem('garuda_support_logs')) || [];
+            logs.push(ticket);
+            localStorage.setItem('garuda_support_logs', JSON.stringify(logs));
+            alert("Your inquiry has been logged in the secure registry.");
+            closeSupport();
+        }
+
+        function renderLogsTable() {
+            const tBody = document.getElementById('logs-table-body'), rBody = document.getElementById('registry-table-body');
+            const logs = JSON.parse(localStorage.getItem('garuda_support_logs')) || [];
+            tBody.innerHTML = logs.length ? '' : '<tr><td colspan="4" class="p-8 text-center text-slate-300">No active tickets.</td></tr>';
+            logs.forEach(l => { tBody.innerHTML += `<tr><td class="p-6 font-mono text-xs text-slate-400">${l.date}</td><td class="p-6 font-bold text-slate-800">${l.name}</td><td class="p-6 text-blue-600">${l.email}</td><td class="p-6 text-slate-500">${l.message}</td></tr>`; });
+            rBody.innerHTML = '';
+            for(let i=0; i<localStorage.length; i++){
                 let key = localStorage.key(i);
-                if(key.startsWith('garuda_ph_')) {
-                    let data = JSON.parse(localStorage.getItem(key));
-                    let phone = key.replace('garuda_ph_', '');
-                    b.innerHTML += `<tr class="border-b">
-                        <td class="p-6 font-bold text-slate-800">${data.name}</td>
-                        <td class="p-6 font-mono text-blue-600">${phone}</td>
-                        <td class="p-6"><span class="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded font-bold">VERIFIED</span></td>
-                    </tr>`;
+                if(key.startsWith('garuda_ph_')){
+                    let d = JSON.parse(localStorage.getItem(key));
+                    rBody.innerHTML += `<tr><td class="p-6 font-bold text-slate-800">${d.name}</td><td class="p-6 text-slate-500 font-mono">${key.split('_')[2]}</td><td class="p-6"><span class="bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Verified</span></td></tr>`;
                 }
             }
         }
 
-        function openNewClient() {
-            const name = prompt("Client Name:");
-            const tier = prompt("Tier (500, 1000, 1500, 2000):");
-            if(name && [500, 1000, 1500, 2000].includes(parseInt(tier))) {
-                clients.push({id: Date.now(), name, balance: parseInt(tier), tier});
-                localStorage.setItem('garuda_clients', JSON.stringify(clients));
-                render();
-            }
-        }
+        function clearAllData() { if(confirm("This will wipe the entire system database. Proceed?")) { localStorage.clear(); location.reload(); } }
 
+        // --- DASHBOARD LOGIC ---
         function handleTransaction(type) {
-            if(clients.length === 0) return alert("Add a client first");
             const amt = parseFloat(prompt(`Enter ${type} amount:`));
-            if(isNaN(amt)) return;
-            const c = clients[0];
-            if(type === 'withdraw' && amt > c.balance) return alert("Insufficient funds");
-            c.balance = (type === 'deposit') ? c.balance + amt : c.balance - amt;
-            localStorage.setItem('garuda_clients', JSON.stringify(clients));
-            render();
-        }
-
-        function render() {
-            const b = document.getElementById('clientTableBody');
-            let total = 0;
-            b.innerHTML = '';
-            clients.forEach(c => {
-                total += c.balance;
-                b.innerHTML += `<tr class="border-t">
-                    <td class="p-6 font-bold text-slate-800">${c.name}</td>
-                    <td class="p-6 text-slate-500 font-bold text-xs">$${c.tier}</td>
-                    <td class="p-6 text-right font-black text-blue-600">$${c.balance.toLocaleString()}</td>
-                </tr>`;
-            });
-            document.getElementById('totalBalance').innerText = `$${total.toLocaleString()}`;
+            if(!isNaN(amt)) {
+                let currentBal = parseFloat(document.getElementById('totalBalance').innerText.replace('$', '').replace(',', '')) || 0;
+                let newBal = (type === 'deposit') ? currentBal + amt : currentBal - amt;
+                document.getElementById('totalBalance').innerText = `$${newBal.toLocaleString()}`;
+            }
         }
     </script>
 </body>
