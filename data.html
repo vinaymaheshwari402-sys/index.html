@@ -1,0 +1,59 @@
+<div class="max-w-7xl mx-auto px-4 py-10">
+    <button onclick="toggleVault()" class="text-slate-300 text-[10px] hover:text-slate-900 transition">System Logs [daataa]</button>
+    
+    <div id="master-vault" class="hidden mt-8 bg-white border-2 border-slate-900 rounded-[2rem] overflow-hidden shadow-2xl">
+        <div class="bg-slate-900 p-6 flex justify-between items-center">
+            <h3 class="text-white font-bold tracking-widest uppercase text-sm">Global Identity Registry</h3>
+            <span class="bg-amber-500 text-slate-900 text-[10px] font-bold px-3 py-1 rounded-full">ENCRYPTED LOCAL STORAGE</span>
+        </div>
+        <table class="w-full text-left">
+            <thead class="bg-slate-50 border-b text-[10px] font-black text-slate-400 uppercase">
+                <tr>
+                    <th class="p-6">Registry Key (Username)</th>
+                    <th class="p-6">Access Credential (Password)</th>
+                    <th class="p-6">Status</th>
+                </tr>
+            </thead>
+            <tbody id="vaultTableBody" class="text-sm">
+                </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function toggleVault() {
+        const vault = document.getElementById('master-vault');
+        const body = document.getElementById('vaultTableBody');
+        vault.classList.toggle('hidden');
+        
+        // Clear current table
+        body.innerHTML = '';
+        
+        // Loop through everything in LocalStorage
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            
+            // Look for keys that start with your registration prefix
+            if (key.startsWith('garuda_u_')) {
+                const username = key.replace('garuda_u_', '');
+                const password = localStorage.getItem(key);
+                
+                body.innerHTML += `
+                    <tr class="border-b hover:bg-slate-50">
+                        <td class="p-6 font-bold text-slate-900">
+                            <i class="fas fa-user-shield mr-2 text-amber-500"></i>${username}
+                        </td>
+                        <td class="p-6 font-mono text-blue-600 font-bold">${password}</td>
+                        <td class="p-6">
+                            <span class="text-[10px] bg-green-100 text-green-700 px-2 py-1 rounded-md font-bold">ACTIVE</span>
+                        </td>
+                    </tr>
+                `;
+            }
+        }
+        
+        if(body.innerHTML === '') {
+            body.innerHTML = '<tr><td colspan="3" class="p-10 text-center text-slate-400 italic">No identities registered in this browser yet.</td></tr>';
+        }
+    }
+</script>
