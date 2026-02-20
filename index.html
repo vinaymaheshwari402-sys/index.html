@@ -102,13 +102,30 @@
         }
 
         #dashboard-view, #support-modal { display: none; }
+
+        /* AUTH MODAL INPUTS */
+        .auth-input {
+            width: 100%;
+            padding: 1rem;
+            background-color: #f1f5f9;
+            border: 2px solid transparent;
+            border-radius: 1rem;
+            margin-bottom: 0.75rem;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .auth-input:focus {
+            border-color: #c5a059;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.1);
+        }
     </style>
 </head>
 <body>
 
     <div id="preloader">
         <div class="coin">$</div>
-        <div class="loader-text">LOADING DOLLARS...</div>
+        <div class="loader-text">Securing Connection...</div>
     </div>
 
     <nav class="glass-nav fixed w-full z-50 transition-all duration-300">
@@ -123,11 +140,8 @@
 
                 <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
                     <a href="#" class="hover:text-blue-600">Home</a>
-                   
-
-<a href="about.html" class="hover:text-blue-600">About Us</a>
+                    <a href="about.html" class="hover:text-blue-600">About Us</a>
                     <a href="#tiers" class="hover:text-blue-600">Accounts</a>
-                    <button onclick="openSupport()" class="hover:text-blue-600">Support</button>
                 </div>
                 <div class="flex space-x-4">
                     <button onclick="showAuth('login')" class="px-5 py-2 text-sm font-bold text-slate-700">Login</button>
@@ -152,61 +166,35 @@
                 <h1 class="text-6xl md:text-8xl font-black text-white mb-6 tracking-tight">
                     Fly Higher with <br><span class="gold-text">Smart Capital</span>
                 </h1>
-                <p class="text-slate-300 text-xl mb-12 max-w-2xl mx-auto">The most intuitive platform for secure dollar settlements and managed accounts.</p>
+                <p class="text-slate-300 text-xl mb-12 max-w-2xl mx-auto">The most intuitive platform for secure settlements and professional account management.</p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <button onclick="showAuth('register')" class="gold-bg text-white px-10 py-5 rounded-2xl font-bold shadow-2xl text-lg hover:scale-105 transition-transform">
-                        Open Your Portal
+                        Create Your Account
                     </button>
                 </div>
             </div>
         </header>
 
-        <section id="about-section" class="py-24 bg-white px-4 border-y border-slate-100">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div>
-                    <span class="gold-text font-bold tracking-widest text-xs uppercase">The Standard</span>
-                    <h2 class="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-6 leading-tight">
-                        Institutional Grade <br>Account Precision.
-                    </h2>
-                    <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                        Garuda provides a seamless bridge between capital management and secure digital accounting. Built for advisors who demand transparency and speed.
-                    </p>
-                    <div class="flex items-center gap-4 text-slate-900 font-bold mb-4">
-                        <i class="fas fa-shield-check gold-text text-2xl"></i>
-                        <span>Secure Mobile Identity Vault</span>
-                    </div>
-                </div>
-                <div class="relative bg-slate-900 p-10 rounded-[2.5rem] text-white shadow-2xl">
-                    <h3 class="text-xl font-bold mb-6 gold-text">Why Garuda?</h3>
-                    <ul class="space-y-4 text-sm text-slate-300">
-                        <li class="flex gap-3"><i class="fas fa-check gold-text"></i> Real-time dollar tracking</li>
-                        <li class="flex gap-3"><i class="fas fa-check gold-text"></i> Instant internal settlements</li>
-                        <li class="flex gap-3"><i class="fas fa-check gold-text"></i> Tiered liquidity access</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
         <section id="tiers" class="py-24 bg-slate-50 px-4">
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer">
-                    <h3 class="font-bold text-lg mb-2">Tier 1</h3>
+                    <h3 class="font-bold text-lg mb-2 text-slate-500 uppercase tracking-widest text-[10px]">Venture</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$500</p>
                     <p class="text-sm text-slate-500">Retail entry levels.</p>
                 </div>
                 <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer">
-                    <h3 class="font-bold text-lg mb-2">Tier 2</h3>
+                    <h3 class="font-bold text-lg mb-2 text-slate-500 uppercase tracking-widest text-[10px]">Growth</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$1,000</p>
                     <p class="text-sm text-slate-500">Growth liquidity.</p>
                 </div>
                 <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer">
-                    <h3 class="font-bold text-lg mb-2">Tier 3</h3>
+                    <h3 class="font-bold text-lg mb-2 text-slate-500 uppercase tracking-widest text-[10px]">Elite</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$1,500</p>
                     <p class="text-sm text-slate-500">Priority reporting.</p>
                 </div>
                 <div class="p-8 border-2 border-slate-900 rounded-3xl bg-white shadow-2xl relative">
-                    <span class="absolute -top-3 left-8 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full">INSTITUTIONAL</span>
-                    <h3 class="font-bold text-lg mb-2 text-slate-900">Tier 4</h3>
+                    <span class="absolute -top-3 left-8 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full text-[10px]">INSTITUTIONAL</span>
+                    <h3 class="font-bold text-lg mb-2 text-slate-500 uppercase tracking-widest text-[10px]">Private</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$2,000</p>
                     <p class="text-sm text-slate-500">Maximum limits.</p>
                 </div>
@@ -214,78 +202,138 @@
         </section>
     </div>
 
-    <div id="auth-modal" class="hidden fixed inset-0 bg-slate-900/90 z-[60] flex items-center justify-center p-4">
-        <div class="bg-white rounded-[2rem] p-10 w-full max-w-md relative">
-            <button onclick="closeAuth()" class="absolute top-8 right-8 text-slate-400"><i class="fas fa-times"></i></button>
-            <div id="auth-content"></div>
+    <div id="auth-modal" class="hidden fixed inset-0 bg-slate-900/90 z-[60] flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white rounded-[2.5rem] p-8 md:p-12 w-full max-w-lg relative shadow-2xl">
+            <button onclick="closeAuth()" class="absolute top-8 right-8 text-slate-400 hover:text-slate-900"><i class="fas fa-times text-xl"></i></button>
+            <div id="auth-content">
+                </div>
         </div>
     </div>
 
     <div id="dashboard-view" class="min-h-screen pt-32 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="bg-white p-12 rounded-[3rem] border shadow-sm">
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Global Account</p>
-                <h4 id="displayUser" class="text-3xl font-bold text-slate-900 mt-2">Admin</h4>
-                <div class="mt-8 p-8 bg-slate-50 rounded-3xl border">
-                    <p class="text-sm text-slate-500">Current Settle Balance</p>
-                    <h2 id="totalBalance" class="text-5xl font-black text-slate-900 mt-2">$0.00</h2>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Global Account</p>
+                        <h4 id="displayUser" class="text-4xl font-black text-slate-900 mt-2">Admin</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="bg-green-100 text-green-600 px-4 py-1 rounded-full text-xs font-bold">Verified Portal</span>
+                    </div>
                 </div>
-                <button onclick="location.reload()" class="mt-8 text-slate-400 underline text-sm">Sign Out</button>
+                <div class="mt-8 p-10 bg-slate-900 rounded-[2rem] text-white">
+                    <p class="text-sm text-slate-400">Available Settlement Balance</p>
+                    <h2 id="totalBalance" class="text-6xl font-black mt-2">$0.00</h2>
+                </div>
+                <button onclick="location.reload()" class="mt-8 text-slate-400 hover:text-red-500 transition-colors font-bold text-sm">Secure Sign Out <i class="fas fa-sign-out-alt ml-2"></i></button>
             </div>
         </div>
     </div>
 
     <script>
-        // --- PRELOADER LOGIC ---
+        // PRELOADER
         window.addEventListener('load', function() {
-            const preloader = document.getElementById('preloader');
-            // Wait 2.5 seconds to ensure the user sees the spinning gold coin
             setTimeout(() => {
+                const preloader = document.getElementById('preloader');
                 preloader.style.opacity = '0';
-                preloader.style.visibility = 'hidden';
+                setTimeout(() => preloader.style.visibility = 'hidden', 800);
             }, 2500);
         });
 
-        // --- PREVIOUS LOGIC INTACT ---
+        // AUTH UI TOGGLE
         function showAuth(type) {
             const modal = document.getElementById('auth-modal');
             const content = document.getElementById('auth-content');
             modal.classList.remove('hidden');
+            
             if(type === 'login') {
                 content.innerHTML = `
-                    <h2 class="text-3xl font-black mb-6">Login</h2>
-                    <input type="tel" id="lPhone" placeholder="Mobile Number" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
-                    <input type="password" id="lPass" placeholder="Password" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
-                    <button onclick="login()" class="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl">Authorize</button>`;
+                    <div class="text-center mb-8">
+                        <h2 class="text-4xl font-black text-slate-900">Welcome Back</h2>
+                        <p class="text-slate-500 mt-2 font-medium">Please enter your portal credentials</p>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold text-slate-400 uppercase ml-2">Email Address</label>
+                        <input type="email" id="lEmail" placeholder="name@company.com" class="auth-input">
+                        
+                        <label class="text-xs font-bold text-slate-400 uppercase ml-2">Password</label>
+                        <input type="password" id="lPass" placeholder="••••••••" class="auth-input">
+                    </div>
+                    <button onclick="login()" class="w-full py-5 bg-slate-900 text-white font-bold rounded-2xl shadow-xl hover:bg-slate-800 transition-all mt-6">Authorize Entry</button>
+                    <p class="text-center text-sm text-slate-500 mt-8">
+                        New to Garuda? <button onclick="showAuth('register')" class="gold-text font-bold">Create an account</button>
+                    </p>`;
             } else {
                 content.innerHTML = `
-                    <h2 class="text-3xl font-black mb-6">Join</h2>
-                    <input type="text" id="rUser" placeholder="Full Name" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
-                    <input type="tel" id="rPhone" placeholder="Mobile Number" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
-                    <input type="password" id="rPass" placeholder="Create Password" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
-                    <button onclick="register()" class="w-full py-4 gold-bg text-white font-bold rounded-2xl">Get Access</button>`;
+                    <div class="text-center mb-8">
+                        <h2 class="text-4xl font-black text-slate-900">Join Garuda</h2>
+                        <p class="text-slate-500 mt-2 font-medium">Start your institutional journey</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
+                        <div class="md:col-span-2">
+                            <label class="text-xs font-bold text-slate-400 uppercase ml-2">Full Name</label>
+                            <input type="text" id="rUser" placeholder="John Doe" class="auth-input">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-400 uppercase ml-2">Email</label>
+                            <input type="email" id="rEmail" placeholder="john@email.com" class="auth-input">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-400 uppercase ml-2">Phone</label>
+                            <input type="tel" id="rPhone" placeholder="+971..." class="auth-input">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-400 uppercase ml-2">Password</label>
+                            <input type="password" id="rPass" placeholder="Create Password" class="auth-input">
+                        </div>
+                        <div>
+                            <label class="text-xs font-bold text-slate-400 uppercase ml-2">Confirm</label>
+                            <input type="password" id="rPassConfirm" placeholder="Confirm Password" class="auth-input">
+                        </div>
+                    </div>
+                    <button onclick="register()" class="w-full py-5 gold-bg text-white font-bold rounded-2xl shadow-xl hover:opacity-90 transition-all mt-4">Register Account</button>
+                    <p class="text-center text-sm text-slate-500 mt-8">
+                        Already have an account? <button onclick="showAuth('login')" class="gold-text font-bold">Login here</button>
+                    </p>`;
             }
         }
 
         function closeAuth() { document.getElementById('auth-modal').classList.add('hidden'); }
+
+        // AUTH LOGIC
         function register() {
             const u = document.getElementById('rUser').value;
+            const e = document.getElementById('rEmail').value;
             const ph = document.getElementById('rPhone').value;
             const p = document.getElementById('rPass').value;
-            localStorage.setItem(`garuda_ph_${ph}`, JSON.stringify({name: u, pass: p}));
-            alert("Registered! Now Login.");
+            const pc = document.getElementById('rPassConfirm').value;
+
+            if(!u || !e || !ph || !p) return alert("Please fill all fields");
+            if(p !== pc) return alert("Passwords do not match!");
+
+            const userData = { name: u, email: e, phone: ph, pass: p };
+            // Save by Email for better professional standard
+            localStorage.setItem(`garuda_user_${e}`, JSON.stringify(userData));
+            
+            alert("Registration Successful! Please login.");
             showAuth('login');
         }
+
         function login() {
-            const ph = document.getElementById('lPhone').value;
+            const e = document.getElementById('lEmail').value;
             const p = document.getElementById('lPass').value;
-            const saved = JSON.parse(localStorage.getItem(`garuda_ph_${ph}`));
+            
+            const saved = JSON.parse(localStorage.getItem(`garuda_user_${e}`));
+            
             if(saved && saved.pass === p) {
                 document.getElementById('landing-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
                 document.getElementById('displayUser').innerText = saved.name;
                 closeAuth();
-            } else { alert("Access Denied"); }
+            } else {
+                alert("Invalid Credentials. Please try again.");
+            }
         }
     </script>
 </body>
