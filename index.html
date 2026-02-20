@@ -9,18 +9,69 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; scroll-behavior: smooth; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; scroll-behavior: smooth; overflow-x: hidden; }
         .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
         .gold-text { color: #c5a059; }
         .gold-bg { background-color: #c5a059; }
-        .logo-container { display: flex; align-items: center; gap: 10px; }
-        #dashboard-view, #support-modal { display: none; }
+        
+        /* PRELOADER STYLES */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0f172a;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s;
+        }
 
-        /* VIDEO BACKGROUND STYLES */
+        .coin {
+            width: 120px;
+            height: 120px;
+            background: #c5a059;
+            border-radius: 50%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+            font-weight: 900;
+            color: #0f172a;
+            box-shadow: 0 0 30px rgba(197, 160, 89, 0.5), inset 0 0 10px rgba(0,0,0,0.2);
+            animation: spin-coin 2s infinite linear;
+            transform-style: preserve-3d;
+            border: 4px solid #e2c08d;
+        }
+
+        @keyframes spin-coin {
+            0% { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        .loader-text {
+            margin-top: 25px;
+            color: #c5a059;
+            letter-spacing: 5px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* HERO & VIDEO STYLES */
         .hero-container {
             position: relative;
             height: 100vh;
-            min-height: 600px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -49,19 +100,23 @@
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%);
             z-index: -1;
         }
+
+        #dashboard-view, #support-modal { display: none; }
     </style>
 </head>
 <body>
 
+    <div id="preloader">
+        <div class="coin">G</div>
+        <div class="loader-text">Authenticating Garuda...</div>
+    </div>
+
     <nav class="glass-nav fixed w-full z-50 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
-                <div class="logo-container">
+                <div class="logo-container flex items-center gap-2">
                     <div class="w-10 h-10 gold-bg rounded-lg flex items-center justify-center shadow-lg">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white">
-                            <path d="M12 2L4.5 20.29L5.21 21L12 18L18.79 21L19.5 20.29L12 2Z" fill="currentColor" opacity="0.3"/>
-                            <path d="M11 8H13V10H14C14.55 10 15 10.45 15 11V13C15 13.55 14.55 14 14 14H11V15H15V17H13V19H11V17H10C9.45 17 9 16.55 9 16V14C9 13.45 9.45 13 10 13H13V12H9V10H11V8Z" fill="white"/>
-                        </svg>
+                        <span class="text-white font-black">G</span>
                     </div>
                     <span class="text-2xl font-extrabold tracking-tighter text-slate-900">GARUDA</span>
                 </div>
@@ -90,7 +145,7 @@
             <div class="max-w-4xl mx-auto text-center px-4 relative z-10">
                 <div class="inline-flex items-center space-x-2 bg-white/10 p-1 pr-4 rounded-full text-blue-300 text-xs font-bold mb-6 backdrop-blur-sm border border-white/10">
                     <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-[10px]">LIVE</span>
-                    <span>Next-Gen Institutional Settlement</span>
+                    <span>Institutional Wealth Protocol</span>
                 </div>
                 <h1 class="text-6xl md:text-8xl font-black text-white mb-6 tracking-tight">
                     Fly Higher with <br><span class="gold-text">Smart Capital</span>
@@ -100,9 +155,6 @@
                     <button onclick="showAuth('register')" class="gold-bg text-white px-10 py-5 rounded-2xl font-bold shadow-2xl text-lg hover:scale-105 transition-transform">
                         Open Your Portal
                     </button>
-                    <a href="#about-section" class="bg-white/10 backdrop-blur-md text-white px-10 py-5 rounded-2xl font-bold border border-white/20 hover:bg-white/20 transition-all text-lg">
-                        Learn More
-                    </a>
                 </div>
             </div>
         </header>
@@ -110,29 +162,24 @@
         <section id="about-section" class="py-24 bg-white px-4 border-y border-slate-100">
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                 <div>
-                    <span class="gold-text font-bold tracking-widest text-xs uppercase">Our Philosophy</span>
+                    <span class="gold-text font-bold tracking-widest text-xs uppercase">The Standard</span>
                     <h2 class="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-6 leading-tight">
-                        Institutional Grade <br>Capital Management.
+                        Institutional Grade <br>Account Precision.
                     </h2>
                     <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                        Garuda is built for transparency and speed. We bridge the gap between traditional capital and secure digital accounting, ensuring every dollar is managed with precision.
+                        Garuda provides a seamless bridge between capital management and secure digital accounting. Built for advisors who demand transparency and speed.
                     </p>
                     <div class="flex items-center gap-4 text-slate-900 font-bold mb-4">
                         <i class="fas fa-shield-check gold-text text-2xl"></i>
                         <span>Secure Mobile Identity Vault</span>
                     </div>
-                    <div class="flex items-center gap-4 text-slate-900 font-bold">
-                        <i class="fas fa-bolt gold-text text-2xl"></i>
-                        <span>Instant Ledger Settlement</span>
-                    </div>
                 </div>
                 <div class="relative bg-slate-900 p-10 rounded-[2.5rem] text-white shadow-2xl">
-                    <h3 class="text-xl font-bold mb-6 gold-text">Platform Benefits</h3>
+                    <h3 class="text-xl font-bold mb-6 gold-text">Why Garuda?</h3>
                     <ul class="space-y-4 text-sm text-slate-300">
-                        <li class="flex gap-3"><i class="fas fa-check gold-text"></i> Real-time dollar-backed settlements</li>
-                        <li class="flex gap-3"><i class="fas fa-check gold-text"></i> Multi-client portfolio tracking</li>
-                        <li class="flex gap-3"><i class="fas fa-check gold-text"></i> High-priority advisor support</li>
-                        <li class="flex gap-3"><i class="fas fa-check gold-text"></i> Secure identity verification (OTP)</li>
+                        <li class="flex gap-3"><i class="fas fa-check gold-text"></i> Real-time dollar tracking</li>
+                        <li class="flex gap-3"><i class="fas fa-check gold-text"></i> Instant internal settlements</li>
+                        <li class="flex gap-3"><i class="fas fa-check gold-text"></i> Tiered liquidity access</li>
                     </ul>
                 </div>
             </div>
@@ -143,23 +190,23 @@
                 <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer">
                     <h3 class="font-bold text-lg mb-2">Tier 1</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$500</p>
-                    <p class="text-sm text-slate-500">Retail entry and basic settlements.</p>
+                    <p class="text-sm text-slate-500">Retail entry levels.</p>
                 </div>
                 <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer">
                     <h3 class="font-bold text-lg mb-2">Tier 2</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$1,000</p>
-                    <p class="text-sm text-slate-500">Enhanced liquidity features.</p>
+                    <p class="text-sm text-slate-500">Growth liquidity.</p>
                 </div>
                 <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer">
                     <h3 class="font-bold text-lg mb-2">Tier 3</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$1,500</p>
-                    <p class="text-sm text-slate-500">Priority support access.</p>
+                    <p class="text-sm text-slate-500">Priority reporting.</p>
                 </div>
                 <div class="p-8 border-2 border-slate-900 rounded-3xl bg-white shadow-2xl relative">
                     <span class="absolute -top-3 left-8 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full">INSTITUTIONAL</span>
-                    <h3 class="font-bold text-lg mb-2">Tier 4</h3>
+                    <h3 class="font-bold text-lg mb-2 text-slate-900">Tier 4</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$2,000</p>
-                    <p class="text-sm text-slate-500">Maximum limits and dedicated advisor.</p>
+                    <p class="text-sm text-slate-500">Maximum limits.</p>
                 </div>
             </div>
         </section>
@@ -172,37 +219,32 @@
         </div>
     </div>
 
-    <div id="support-modal" class="fixed inset-0 bg-slate-900/95 z-[100] flex items-center justify-center p-4">
-        <div class="bg-white rounded-[2.5rem] p-10 w-full max-w-md relative">
-            <button onclick="closeSupport()" class="absolute top-8 right-8 text-slate-400"><i class="fas fa-times text-xl"></i></button>
-            <h2 class="text-3xl font-black mb-2 text-slate-900">Support</h2>
-            <form onsubmit="sendSupport(event)">
-                <input type="text" id="sName" placeholder="Full Name" required class="w-full p-4 bg-slate-100 rounded-2xl mb-4">
-                <textarea id="sMessage" placeholder="How can we help?" required rows="4" class="w-full p-4 bg-slate-100 rounded-2xl mb-6"></textarea>
-                <button type="submit" class="w-full py-5 gold-bg text-white font-bold rounded-2xl">Send Inquiry</button>
-            </form>
-        </div>
-    </div>
-
     <div id="dashboard-view" class="min-h-screen pt-32 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4">
             <div class="bg-white p-12 rounded-[3rem] border shadow-sm">
-                <p class="text-xs font-bold text-slate-400 tracking-widest uppercase">Welcome Back</p>
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest">Global Account</p>
                 <h4 id="displayUser" class="text-3xl font-bold text-slate-900 mt-2">Admin</h4>
                 <div class="mt-8 p-8 bg-slate-50 rounded-3xl border">
-                    <p class="text-sm text-slate-500">Total Portfolio Balance</p>
+                    <p class="text-sm text-slate-500">Current Settle Balance</p>
                     <h2 id="totalBalance" class="text-5xl font-black text-slate-900 mt-2">$0.00</h2>
                 </div>
-                <button onclick="location.reload()" class="mt-8 text-slate-400 underline text-sm hover:text-slate-900">Sign Out Securely</button>
+                <button onclick="location.reload()" class="mt-8 text-slate-400 underline text-sm">Sign Out</button>
             </div>
         </div>
     </div>
 
     <script>
-        function openSupport() { document.getElementById('support-modal').style.display = 'flex'; }
-        function closeSupport() { document.getElementById('support-modal').style.display = 'none'; }
-        function sendSupport(e) { e.preventDefault(); alert("Inquiry Sent!"); closeSupport(); }
+        // --- PRELOADER LOGIC ---
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            // Wait 2.5 seconds to ensure the user sees the spinning gold coin
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 2500);
+        });
 
+        // --- PREVIOUS LOGIC INTACT ---
         function showAuth(type) {
             const modal = document.getElementById('auth-modal');
             const content = document.getElementById('auth-content');
@@ -215,7 +257,7 @@
                     <button onclick="login()" class="w-full py-4 bg-slate-900 text-white font-bold rounded-2xl">Authorize</button>`;
             } else {
                 content.innerHTML = `
-                    <h2 class="text-3xl font-black mb-6">Join Garuda</h2>
+                    <h2 class="text-3xl font-black mb-6">Join</h2>
                     <input type="text" id="rUser" placeholder="Full Name" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
                     <input type="tel" id="rPhone" placeholder="Mobile Number" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
                     <input type="password" id="rPass" placeholder="Create Password" class="w-full p-4 bg-slate-100 rounded-2xl mb-3 outline-none">
@@ -224,17 +266,14 @@
         }
 
         function closeAuth() { document.getElementById('auth-modal').classList.add('hidden'); }
-
         function register() {
             const u = document.getElementById('rUser').value;
             const ph = document.getElementById('rPhone').value;
             const p = document.getElementById('rPass').value;
-            if(!u || !ph || !p) return alert("Fill all fields");
             localStorage.setItem(`garuda_ph_${ph}`, JSON.stringify({name: u, pass: p}));
-            alert("Success! Please Login.");
+            alert("Registered! Now Login.");
             showAuth('login');
         }
-
         function login() {
             const ph = document.getElementById('lPhone').value;
             const p = document.getElementById('lPass').value;
@@ -244,7 +283,7 @@
                 document.getElementById('dashboard-view').style.display = 'block';
                 document.getElementById('displayUser').innerText = saved.name;
                 closeAuth();
-            } else { alert("Unauthorized access"); }
+            } else { alert("Access Denied"); }
         }
     </script>
 </body>
