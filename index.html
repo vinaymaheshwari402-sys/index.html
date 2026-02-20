@@ -10,7 +10,7 @@
     <link rel="manifest" href="manifest.json">
     
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; scroll-behavior: smooth; }
         .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
         .glass-nav { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
         .gold-text { color: #c5a059; }
@@ -36,6 +36,7 @@
 
                 <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
                     <a href="#" class="hover:text-blue-600" onclick="location.reload()">Home</a>
+                    <a href="#about" class="hover:text-blue-600">About</a>
                     <a href="#tiers" class="hover:text-blue-600">Accounts</a>
                     <button onclick="openSupport()" class="hover:text-blue-600 transition">Support</button>
                 </div>
@@ -53,63 +54,6 @@
                 <div class="inline-flex items-center space-x-2 bg-white/10 p-1 pr-4 rounded-full text-blue-300 text-xs font-bold mb-6">
                     <span class="bg-blue-500 text-white px-2 py-1 rounded-full text-[10px]">NEW</span>
                     <span>Experience the Garuda $2,000 Platinum Tier</span>
-                    <section id="about" class="py-24 bg-slate-50 px-4 border-y border-slate-200">
-    <div class="max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-            <div>
-                <span class="gold-text font-bold tracking-widest text-xs uppercase">The Garuda Standard</span>
-                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-6 leading-tight">
-                    Beyond Banking. <br>Secure Wealth Management.
-                </h2>
-                <p class="text-slate-600 text-lg mb-8 leading-relaxed">
-                    Garuda is built on the principles of <strong>transparency, speed, and security</strong>. We provide a bridge between traditional capital and digital settlements, allowing you to manage client portfolios with institutional-grade tools.
-                </p>
-                <div class="space-y-4">
-                    <div class="flex items-start gap-4">
-                        <div class="mt-1 w-6 h-6 rounded-full gold-bg flex items-center justify-center text-white text-[10px]">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900">Secure Identity Registry</h4>
-                            <p class="text-sm text-slate-500">Every account is verified through mobile-linked identity vaulting.</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-4">
-                        <div class="mt-1 w-6 h-6 rounded-full gold-bg flex items-center justify-center text-white text-[10px]">
-                            <i class="fas fa-check"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-slate-900">Instant Settlement</h4>
-                            <p class="text-sm text-slate-500">Tier-based liquidity allows for immediate dollar-backed transactions.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white p-8 rounded-[2.5rem] shadow-2xl border border-slate-100 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 gold-bg opacity-5 -mr-16 -mt-16 rounded-full"></div>
-                <h3 class="text-xl font-bold text-slate-900 mb-6">Account Structure</h3>
-                <div class="space-y-6">
-                    <div class="flex justify-between items-center pb-4 border-b">
-                        <span class="text-slate-500">Retail Entry</span>
-                        <span class="font-bold text-slate-900">Tier 1 & 2</span>
-                    </div>
-                    <div class="flex justify-between items-center pb-4 border-b">
-                        <span class="text-slate-500">Priority Access</span>
-                        <span class="font-bold text-slate-900">Tier 3</span>
-                    </div>
-                    <div class="flex justify-between items-center pb-4 border-b">
-                        <span class="text-slate-500">Institutional Level</span>
-                        <span class="gold-text font-bold">Tier 4</span>
-                    </div>
-                </div>
-                <p class="mt-8 text-xs text-slate-400 italic">
-                    *All accounts include real-time balance tracking and dashboard access.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
                 </div>
                 <h1 class="text-6xl md:text-8xl font-black text-white mb-6 tracking-tight">
                     Fly Higher with <br><span class="gold-text">Smart Capital</span>
@@ -121,26 +65,78 @@
             </div>
         </section>
 
-        <section id="tiers" class="py-24 bg-white px-4">
+        <section id="about" class="py-24 bg-white px-4 border-y border-slate-100">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <span class="gold-text font-bold tracking-widest text-xs uppercase">Institutional Grade</span>
+                        <h2 class="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-6 leading-tight">
+                            The Standard for <br>Modern Settlement.
+                        </h2>
+                        <p class="text-slate-600 text-lg mb-8 leading-relaxed">
+                            Garuda provides a seamless bridge between capital management and secure digital accounting. Built for advisors who demand <strong>transparency and speed</strong>, our platform ensures every dollar is accounted for with military-grade precision.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-shield-halved gold-text mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Identity Vault</h4>
+                                    <p class="text-xs text-slate-500">Secure mobile-linked verification for every user.</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-bolt gold-text mt-1"></i>
+                                <div>
+                                    <h4 class="font-bold text-slate-900 text-sm">Instant Ledger</h4>
+                                    <p class="text-xs text-slate-500">Real-time balance updates across all account tiers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute -inset-4 bg-amber-500/10 rounded-[3rem] blur-2xl"></div>
+                        <div class="relative bg-slate-900 p-8 rounded-[2.5rem] shadow-2xl text-white">
+                            <h3 class="text-xl font-bold mb-6">Account Philosophy</h3>
+                            <div class="space-y-4">
+                                <div class="p-4 bg-white/5 rounded-2xl border border-white/10">
+                                    <p class="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">Entry Level</p>
+                                    <p class="text-sm">Accessible capital starting from $500.</p>
+                                </div>
+                                <div class="p-4 bg-white/5 rounded-2xl border border-white/10">
+                                    <p class="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">Growth Tier</p>
+                                    <p class="text-sm">Enhanced liquidity for scaling portfolios.</p>
+                                </div>
+                                <div class="p-4 gold-bg rounded-2xl text-slate-900 font-bold">
+                                    <p class="text-[10px] uppercase tracking-widest mb-1">Institutional</p>
+                                    <p class="text-sm">Maximum limits and high-priority support.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tiers" class="py-24 bg-slate-50 px-4">
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="p-8 border rounded-3xl bg-slate-50 hover:border-amber-500 transition-all cursor-pointer group">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors">
+                <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer group">
+                    <div class="w-12 h-12 bg-slate-50 rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors">
                         <i class="fas fa-dollar-sign text-amber-600 group-hover:text-white"></i>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Tier 1</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$500</p>
                     <p class="text-sm text-slate-500">Perfect for retail entry and basic settlements.</p>
                 </div>
-                <div class="p-8 border rounded-3xl bg-slate-50 hover:border-amber-500 transition-all cursor-pointer group">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors">
+                <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer group">
+                    <div class="w-12 h-12 bg-slate-50 rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors">
                         <i class="fas fa-coins text-amber-600 group-hover:text-white"></i>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Tier 2</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$1,000</p>
                     <p class="text-sm text-slate-500">Enhanced liquidity and reporting features.</p>
                 </div>
-                <div class="p-8 border rounded-3xl bg-slate-50 hover:border-amber-500 transition-all cursor-pointer group">
-                    <div class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors">
+                <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer group">
+                    <div class="w-12 h-12 bg-slate-50 rounded-xl shadow-sm flex items-center justify-center mb-6 group-hover:bg-amber-500 transition-colors">
                         <i class="fas fa-briefcase text-amber-600 group-hover:text-white"></i>
                     </div>
                     <h3 class="font-bold text-lg mb-2">Tier 3</h3>
@@ -149,7 +145,7 @@
                 </div>
                 <div class="p-8 border-2 border-slate-900 rounded-3xl bg-white shadow-2xl relative">
                     <span class="absolute -top-3 left-8 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full">INSTITUTIONAL</span>
-                    <div class="w-12 h-12 bg-amber-500 rounded-xl shadow-sm flex items-center justify-center mb-6">
+                    <div class="w-12 h-12 gold-bg rounded-xl shadow-sm flex items-center justify-center mb-6">
                         <i class="fas fa-vault text-white"></i>
                     </div>
                     <h3 class="font-bold text-lg mb-2 text-slate-900">Tier 4</h3>
@@ -165,7 +161,7 @@
             <button onclick="closeSupport()" class="absolute top-8 right-8 text-slate-400 hover:text-slate-900"><i class="fas fa-times text-xl"></i></button>
             <h2 class="text-3xl font-black mb-2 text-slate-900">Support</h2>
             <p class="text-slate-500 mb-8 text-sm">Direct line to a Garuda Advisor</p>
-          <form action="submit_support.php" method="POST">
+            <form onsubmit="sendSupport(event)">
                 <input type="text" id="sName" placeholder="Full Name" required class="w-full p-4 bg-slate-100 rounded-2xl mb-4 outline-none focus:ring-2 ring-amber-500 transition-all">
                 <input type="email" id="sEmail" placeholder="Email Address" required class="w-full p-4 bg-slate-100 rounded-2xl mb-4 outline-none focus:ring-2 ring-amber-500 transition-all">
                 <textarea id="sMessage" placeholder="How can we help?" required rows="4" class="w-full p-4 bg-slate-100 rounded-2xl mb-6 outline-none focus:ring-2 ring-amber-500 transition-all"></textarea>
@@ -255,7 +251,6 @@
         let clients = JSON.parse(localStorage.getItem('garuda_clients')) || [];
         let generatedOTP = null;
 
-        // --- NEW SUPPORT FUNCTIONS ---
         function openSupport() {
             document.getElementById('support-modal').style.display = 'flex';
         }
@@ -270,12 +265,10 @@
                 msg: document.getElementById('sMessage').value,
                 time: new Date().toLocaleString()
             };
-            // Logic to save ticket to a separate log if you wish
             alert("Support Request Logged for " + ticket.name);
             closeSupport();
         }
 
-        // --- YOUR ORIGINAL AUTH LOGIC ---
         function showAuth(type) {
             const modal = document.getElementById('auth-modal');
             const content = document.getElementById('auth-content');
@@ -354,7 +347,6 @@
             } else { alert("Access Denied"); }
         }
 
-        // --- YOUR ORIGINAL VAULT & CLIENT LOGIC ---
         function toggleVault() {
             const v = document.getElementById('master-vault');
             const b = document.getElementById('vaultTableBody');
