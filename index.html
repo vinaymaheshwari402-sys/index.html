@@ -103,7 +103,6 @@
 
         #dashboard-view, #support-modal { display: none; }
 
-        /* AUTH MODAL INPUTS */
         .auth-input {
             width: 100%;
             padding: 1rem;
@@ -118,6 +117,15 @@
             border-color: #c5a059;
             background-color: #fff;
             box-shadow: 0 4px 12px rgba(197, 160, 89, 0.1);
+        }
+
+        /* IMAGE STYLES */
+        .feature-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -140,7 +148,7 @@
 
                 <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
                     <a href="#" class="hover:text-blue-600">Home</a>
-                    <a href="about.html" class="hover:text-blue-600">About Us</a>
+                    <a href="#multiplier" class="hover:text-blue-600">Rewards</a>
                     <a href="#tiers" class="hover:text-blue-600">Accounts</a>
                 </div>
                 <div class="flex space-x-4">
@@ -167,46 +175,102 @@
                     Fly Higher with <br><span class="gold-text">Smart Capital</span>
                 </h1>
                 <p class="text-slate-300 text-xl mb-12 max-w-2xl mx-auto">The most intuitive platform for secure settlements and professional account management.</p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <button onclick="showAuth('register')" class="gold-bg text-white px-10 py-5 rounded-2xl font-bold shadow-2xl text-lg hover:scale-105 transition-transform">
-                        Create Your Account
-                    </button>
-                </div>
+                <button onclick="showAuth('register')" class="gold-bg text-white px-10 py-5 rounded-2xl font-bold shadow-2xl text-lg hover:scale-105 transition-transform">
+                    Create Your Account
+                </button>
             </div>
         </header>
 
+        <section class="py-24 bg-white px-4">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?auto=format&fit=crop&w=800&q=80" alt="Wealth Management" class="feature-img">
+                <div>
+                    <span class="gold-text font-bold tracking-widest text-xs uppercase">Institutional Strength</span>
+                    <h2 class="text-5xl font-black text-slate-900 mt-4 mb-6 leading-tight">Digital Assets Meets Traditional Trust.</h2>
+                    <p class="text-slate-500 text-lg leading-relaxed">We provide the bridge between modern algorithmic management and high-liquidity accounting. Our systems are designed for the top 1% of wealth managers who require absolute precision.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="multiplier" class="py-24 bg-slate-900 text-white px-4 relative overflow-hidden">
+            <div class="max-w-7xl mx-auto relative z-10">
+                <div class="text-center mb-16">
+                    <span class="gold-text font-bold tracking-widest text-xs uppercase">Growth Incentive</span>
+                    <h2 class="text-5xl font-black mt-4">The Multiplier Protocol</h2>
+                    <p class="text-slate-400 mt-4 max-w-xl mx-auto">Unlock massive passive streams by bringing institutional liquidity into the Garuda ecosystem.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-white/5 border border-white/10 p-10 rounded-[3rem] backdrop-blur-xl group hover:border-amber-500/50 transition-all">
+                        <div class="w-16 h-16 gold-bg rounded-2xl flex items-center justify-center mb-6 text-3xl font-black text-slate-900">01</div>
+                        <h3 class="text-3xl font-bold mb-4">Silver Network</h3>
+                        <p class="text-slate-400 mb-8 leading-relaxed">Open **5 active accounts** under your management to unlock the first tier of the Garuda protocol.</p>
+                        <div class="flex items-center gap-4 p-6 bg-amber-500/10 rounded-2xl border border-amber-500/20">
+                            <span class="text-4xl font-black gold-text">+1.0%</span>
+                            <span class="text-sm font-semibold">Recurring income from each additional account settlement.</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 p-10 rounded-[3rem] backdrop-blur-xl group hover:border-amber-500/50 transition-all">
+                        <div class="w-16 h-16 gold-bg rounded-2xl flex items-center justify-center mb-6 text-3xl font-black text-slate-900">02</div>
+                        <h3 class="text-3xl font-bold mb-4">Gold Network</h3>
+                        <p class="text-slate-400 mb-8 leading-relaxed">Scale your management to **7 active accounts** to maximize your institutional yield override.</p>
+                        <div class="flex items-center gap-4 p-6 bg-amber-500/10 rounded-2xl border border-amber-500/20">
+                            <span class="text-4xl font-black gold-text">+1.5%</span>
+                            <span class="text-sm font-semibold">Maximum recurring income from all secondary settlements.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px]"></div>
+        </section>
+
         <section id="tiers" class="py-24 bg-slate-50 px-4">
+            <div class="max-w-7xl mx-auto text-center mb-12">
+                <h2 class="text-4xl font-black text-slate-900">Select Your Tier</h2>
+            </div>
             <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer">
                     <h3 class="font-bold text-lg mb-2 text-slate-500 uppercase tracking-widest text-[10px]">Venture</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$500</p>
-                    <p class="text-sm text-slate-500">Retail entry levels.</p>
                 </div>
                 <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer">
                     <h3 class="font-bold text-lg mb-2 text-slate-500 uppercase tracking-widest text-[10px]">Growth</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$1,000</p>
-                    <p class="text-sm text-slate-500">Growth liquidity.</p>
                 </div>
                 <div class="p-8 border rounded-3xl bg-white hover:border-amber-500 transition-all cursor-pointer">
                     <h3 class="font-bold text-lg mb-2 text-slate-500 uppercase tracking-widest text-[10px]">Elite</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$1,500</p>
-                    <p class="text-sm text-slate-500">Priority reporting.</p>
                 </div>
                 <div class="p-8 border-2 border-slate-900 rounded-3xl bg-white shadow-2xl relative">
-                    <span class="absolute -top-3 left-8 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full text-[10px]">INSTITUTIONAL</span>
+                    <span class="absolute -top-3 left-8 bg-slate-900 text-white text-[10px] font-bold px-3 py-1 rounded-full">INSTITUTIONAL</span>
                     <h3 class="font-bold text-lg mb-2 text-slate-500 uppercase tracking-widest text-[10px]">Private</h3>
                     <p class="text-3xl font-black text-slate-900 mb-4">$2,000</p>
-                    <p class="text-sm text-slate-500">Maximum limits.</p>
                 </div>
             </div>
         </section>
+
+        <footer class="bg-white border-t border-slate-100 py-12 px-4">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 gold-bg rounded flex items-center justify-center text-white font-black text-xs">G</div>
+                    <span class="font-black tracking-tighter text-slate-900">GARUDA</span>
+                </div>
+                <div class="flex gap-8 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                    <a href="#">Security</a>
+                    <a href="#">Privacy</a>
+                    <a href="#">Terms</a>
+                    <a href="#">Compliance</a>
+                </div>
+                <p class="text-xs text-slate-400">© 2026 Garuda Institutional Wealth. All rights reserved.</p>
+            </div>
+        </footer>
     </div>
 
     <div id="auth-modal" class="hidden fixed inset-0 bg-slate-900/90 z-[60] flex items-center justify-center p-4 backdrop-blur-sm">
         <div class="bg-white rounded-[2.5rem] p-8 md:p-12 w-full max-w-lg relative shadow-2xl">
             <button onclick="closeAuth()" class="absolute top-8 right-8 text-slate-400 hover:text-slate-900"><i class="fas fa-times text-xl"></i></button>
-            <div id="auth-content">
-                </div>
+            <div id="auth-content"></div>
         </div>
     </div>
 
@@ -232,7 +296,6 @@
     </div>
 
     <script>
-        // PRELOADER
         window.addEventListener('load', function() {
             setTimeout(() => {
                 const preloader = document.getElementById('preloader');
@@ -241,7 +304,6 @@
             }, 2500);
         });
 
-        // AUTH UI TOGGLE
         function showAuth(type) {
             const modal = document.getElementById('auth-modal');
             const content = document.getElementById('auth-content');
@@ -256,7 +318,6 @@
                     <div class="space-y-2">
                         <label class="text-xs font-bold text-slate-400 uppercase ml-2">Email Address</label>
                         <input type="email" id="lEmail" placeholder="name@company.com" class="auth-input">
-                        
                         <label class="text-xs font-bold text-slate-400 uppercase ml-2">Password</label>
                         <input type="password" id="lPass" placeholder="••••••••" class="auth-input">
                     </div>
@@ -275,33 +336,18 @@
                             <label class="text-xs font-bold text-slate-400 uppercase ml-2">Full Name</label>
                             <input type="text" id="rUser" placeholder="John Doe" class="auth-input">
                         </div>
-                        <div>
-                            <label class="text-xs font-bold text-slate-400 uppercase ml-2">Email</label>
-                            <input type="email" id="rEmail" placeholder="john@email.com" class="auth-input">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-slate-400 uppercase ml-2">Phone</label>
-                            <input type="tel" id="rPhone" placeholder="+971..." class="auth-input">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-slate-400 uppercase ml-2">Password</label>
-                            <input type="password" id="rPass" placeholder="Create Password" class="auth-input">
-                        </div>
-                        <div>
-                            <label class="text-xs font-bold text-slate-400 uppercase ml-2">Confirm</label>
-                            <input type="password" id="rPassConfirm" placeholder="Confirm Password" class="auth-input">
-                        </div>
+                        <div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Email</label><input type="email" id="rEmail" class="auth-input"></div>
+                        <div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Phone</label><input type="tel" id="rPhone" class="auth-input"></div>
+                        <div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Password</label><input type="password" id="rPass" class="auth-input"></div>
+                        <div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Confirm</label><input type="password" id="rPassConfirm" class="auth-input"></div>
                     </div>
                     <button onclick="register()" class="w-full py-5 gold-bg text-white font-bold rounded-2xl shadow-xl hover:opacity-90 transition-all mt-4">Register Account</button>
-                    <p class="text-center text-sm text-slate-500 mt-8">
-                        Already have an account? <button onclick="showAuth('login')" class="gold-text font-bold">Login here</button>
-                    </p>`;
+                    <p class="text-center text-sm text-slate-500 mt-8">Already have an account? <button onclick="showAuth('login')" class="gold-text font-bold">Login here</button></p>`;
             }
         }
 
         function closeAuth() { document.getElementById('auth-modal').classList.add('hidden'); }
 
-        // AUTH LOGIC
         function register() {
             const u = document.getElementById('rUser').value;
             const e = document.getElementById('rEmail').value;
@@ -312,10 +358,7 @@
             if(!u || !e || !ph || !p) return alert("Please fill all fields");
             if(p !== pc) return alert("Passwords do not match!");
 
-            const userData = { name: u, email: e, phone: ph, pass: p };
-            // Save by Email for better professional standard
-            localStorage.setItem(`garuda_user_${e}`, JSON.stringify(userData));
-            
+            localStorage.setItem(`garuda_user_${e}`, JSON.stringify({ name: u, email: e, phone: ph, pass: p }));
             alert("Registration Successful! Please login.");
             showAuth('login');
         }
@@ -323,17 +366,13 @@
         function login() {
             const e = document.getElementById('lEmail').value;
             const p = document.getElementById('lPass').value;
-            
             const saved = JSON.parse(localStorage.getItem(`garuda_user_${e}`));
-            
             if(saved && saved.pass === p) {
                 document.getElementById('landing-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
                 document.getElementById('displayUser').innerText = saved.name;
                 closeAuth();
-            } else {
-                alert("Invalid Credentials. Please try again.");
-            }
+            } else { alert("Invalid Credentials."); }
         }
     </script>
 </body>
