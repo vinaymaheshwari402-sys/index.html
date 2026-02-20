@@ -14,89 +14,43 @@
         .gold-text { color: #c5a059; }
         .gold-bg { background-color: #c5a059; }
         
-        /* PRELOADER STYLES */
         #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #0f172a;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #0f172a; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999;
             transition: opacity 0.8s ease, visibility 0.8s;
         }
 
         .coin {
-            width: 120px;
-            height: 120px;
-            background: #c5a059;
-            border-radius: 50%;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 50px;
-            font-weight: 900;
-            color: #0f172a;
+            width: 120px; height: 120px; background: #c5a059; border-radius: 50%;
+            position: relative; display: flex; justify-content: center; align-items: center;
+            font-size: 50px; font-weight: 900; color: #0f172a;
             box-shadow: 0 0 30px rgba(197, 160, 89, 0.5), inset 0 0 10px rgba(0,0,0,0.2);
-            animation: spin-coin 2s infinite linear;
-            transform-style: preserve-3d;
+            animation: spin-coin 2s infinite linear; transform-style: preserve-3d;
             border: 4px solid #e2c08d;
         }
 
-        @keyframes spin-coin {
-            0% { transform: rotateY(0deg); }
-            100% { transform: rotateY(360deg); }
-        }
+        @keyframes spin-coin { 0% { transform: rotateY(0deg); } 100% { transform: rotateY(360deg); } }
 
         .loader-text {
-            margin-top: 25px;
-            color: #c5a059;
-            letter-spacing: 5px;
-            font-weight: 700;
-            font-size: 14px;
-            text-transform: uppercase;
-            animation: pulse 1.5s infinite;
+            margin-top: 25px; color: #c5a059; letter-spacing: 5px; font-weight: 700;
+            font-size: 14px; text-transform: uppercase; animation: pulse 1.5s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        /* HERO & VIDEO STYLES */
         .hero-container {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            position: relative; height: 100vh; display: flex;
+            align-items: center; justify-content: center; overflow: hidden;
         }
 
         #hero-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
-            z-index: -2;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
+            position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%;
+            z-index: -2; transform: translate(-50%, -50%); object-fit: cover;
         }
 
         .video-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.7) 100%);
             z-index: -1;
         }
@@ -104,29 +58,10 @@
         #dashboard-view, #support-modal { display: none; }
 
         .auth-input {
-            width: 100%;
-            padding: 1rem;
-            background-color: #f1f5f9;
-            border: 2px solid transparent;
-            border-radius: 1rem;
-            margin-bottom: 0.75rem;
-            outline: none;
-            transition: all 0.2s;
+            width: 100%; padding: 1rem; background-color: #f1f5f9; border: 2px solid transparent;
+            border-radius: 1rem; margin-bottom: 0.75rem; outline: none; transition: all 0.2s;
         }
-        .auth-input:focus {
-            border-color: #c5a059;
-            background-color: #fff;
-            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.1);
-        }
-
-        /* IMAGE STYLES */
-        .feature-img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 2rem;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
+        .auth-input:focus { border-color: #c5a059; background-color: #fff; box-shadow: 0 4px 12px rgba(197, 160, 89, 0.1); }
     </style>
 </head>
 <body>
@@ -148,6 +83,7 @@
 
                 <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
                     <a href="#" class="hover:text-blue-600">Home</a>
+                    <a href="#about" class="hover:text-blue-600">About Us</a>
                     <a href="#multiplier" class="hover:text-blue-600">Rewards</a>
                     <a href="#tiers" class="hover:text-blue-600">Accounts</a>
                 </div>
@@ -181,13 +117,12 @@
             </div>
         </header>
 
-        <section class="py-24 bg-white px-4">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                <img src="https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=800&q=80" alt="Professional Wealth Management with Dollars" class="feature-img">
-                <div>
-                    <span class="gold-text font-bold tracking-widest text-xs uppercase">Institutional Strength</span>
-                    <h2 class="text-5xl font-black text-slate-900 mt-4 mb-6 leading-tight">Digital Assets Meets Traditional Trust.</h2>
-                    <p class="text-slate-500 text-lg leading-relaxed">We provide the bridge between modern algorithmic management and high-liquidity accounting. Our systems are designed for the top 1% of wealth managers who require absolute precision.</p>
+        <section id="about" class="py-24 bg-white px-4">
+            <div class="max-w-7xl mx-auto text-center">
+                <span class="gold-text font-bold tracking-widest text-xs uppercase">Institutional Strength</span>
+                <h2 class="text-5xl font-black text-slate-900 mt-4 mb-6 leading-tight">Digital Assets Meets Traditional Trust.</h2>
+                <div class="max-w-3xl mx-auto">
+                    <p class="text-slate-500 text-lg leading-relaxed">We provide the bridge between modern algorithmic management and high-liquidity accounting. Our systems are designed for the top 1% of wealth managers who require absolute precision and institutional-grade security.</p>
                 </div>
             </div>
         </section>
@@ -222,7 +157,6 @@
                     </div>
                 </div>
             </div>
-            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px]"></div>
         </section>
 
         <section id="tiers" class="py-24 bg-slate-50 px-4">
@@ -257,10 +191,10 @@
                     <span class="font-black tracking-tighter text-slate-900">GARUDA</span>
                 </div>
                 <div class="flex gap-8 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                    <a href="#about">About Us</a>
                     <a href="#">Security</a>
                     <a href="#">Privacy</a>
                     <a href="#">Terms</a>
-                    <a href="#">Compliance</a>
                 </div>
                 <p class="text-xs text-slate-400">© 2026 Garuda Institutional Wealth. All rights reserved.</p>
             </div>
@@ -290,7 +224,6 @@
                     <p class="text-sm text-slate-400">Available Settlement Balance</p>
                     <h2 id="totalBalance" class="text-6xl font-black mt-2">$0.00</h2>
                 </div>
-                <button onclick="location.reload()" class="mt-8 text-slate-400 hover:text-red-500 transition-colors font-bold text-sm">Secure Sign Out <i class="fas fa-sign-out-alt ml-2"></i></button>
             </div>
         </div>
     </div>
@@ -308,41 +241,10 @@
             const modal = document.getElementById('auth-modal');
             const content = document.getElementById('auth-content');
             modal.classList.remove('hidden');
-            
             if(type === 'login') {
-                content.innerHTML = `
-                    <div class="text-center mb-8">
-                        <h2 class="text-4xl font-black text-slate-900">Welcome Back</h2>
-                        <p class="text-slate-500 mt-2 font-medium">Please enter your portal credentials</p>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold text-slate-400 uppercase ml-2">Email Address</label>
-                        <input type="email" id="lEmail" placeholder="name@company.com" class="auth-input">
-                        <label class="text-xs font-bold text-slate-400 uppercase ml-2">Password</label>
-                        <input type="password" id="lPass" placeholder="••••••••" class="auth-input">
-                    </div>
-                    <button onclick="login()" class="w-full py-5 bg-slate-900 text-white font-bold rounded-2xl shadow-xl hover:bg-slate-800 transition-all mt-6">Authorize Entry</button>
-                    <p class="text-center text-sm text-slate-500 mt-8">
-                        New to Garuda? <button onclick="showAuth('register')" class="gold-text font-bold">Create an account</button>
-                    </p>`;
+                content.innerHTML = `<div class="text-center mb-8"><h2 class="text-4xl font-black text-slate-900">Welcome Back</h2><p class="text-slate-500 mt-2 font-medium">Please enter your portal credentials</p></div><div class="space-y-2"><label class="text-xs font-bold text-slate-400 uppercase ml-2">Email Address</label><input type="email" id="lEmail" placeholder="name@company.com" class="auth-input"><label class="text-xs font-bold text-slate-400 uppercase ml-2">Password</label><input type="password" id="lPass" placeholder="••••••••" class="auth-input"></div><button onclick="login()" class="w-full py-5 bg-slate-900 text-white font-bold rounded-2xl shadow-xl hover:bg-slate-800 transition-all mt-6">Authorize Entry</button>`;
             } else {
-                content.innerHTML = `
-                    <div class="text-center mb-8">
-                        <h2 class="text-4xl font-black text-slate-900">Join Garuda</h2>
-                        <p class="text-slate-500 mt-2 font-medium">Start your institutional journey</p>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-4">
-                        <div class="md:col-span-2">
-                            <label class="text-xs font-bold text-slate-400 uppercase ml-2">Full Name</label>
-                            <input type="text" id="rUser" placeholder="John Doe" class="auth-input">
-                        </div>
-                        <div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Email</label><input type="email" id="rEmail" class="auth-input"></div>
-                        <div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Phone</label><input type="tel" id="rPhone" class="auth-input"></div>
-                        <div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Password</label><input type="password" id="rPass" class="auth-input"></div>
-                        <div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Confirm</label><input type="password" id="rPassConfirm" class="auth-input"></div>
-                    </div>
-                    <button onclick="register()" class="w-full py-5 gold-bg text-white font-bold rounded-2xl shadow-xl hover:opacity-90 transition-all mt-4">Register Account</button>
-                    <p class="text-center text-sm text-slate-500 mt-8">Already have an account? <button onclick="showAuth('login')" class="gold-text font-bold">Login here</button></p>`;
+                content.innerHTML = `<div class="text-center mb-8"><h2 class="text-4xl font-black text-slate-900">Join Garuda</h2><p class="text-slate-500 mt-2 font-medium">Start your institutional journey</p></div><div class="grid grid-cols-1 md:grid-cols-2 gap-x-4"><div class="md:col-span-2"><label class="text-xs font-bold text-slate-400 uppercase ml-2">Full Name</label><input type="text" id="rUser" placeholder="John Doe" class="auth-input"></div><div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Email</label><input type="email" id="rEmail" class="auth-input"></div><div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Phone</label><input type="tel" id="rPhone" class="auth-input"></div><div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Password</label><input type="password" id="rPass" class="auth-input"></div><div><label class="text-xs font-bold text-slate-400 uppercase ml-2">Confirm</label><input type="password" id="rPassConfirm" class="auth-input"></div></div><button onclick="register()" class="w-full py-5 gold-bg text-white font-bold rounded-2xl shadow-xl hover:opacity-90 transition-all mt-4">Register Account</button>`;
             }
         }
 
@@ -351,16 +253,12 @@
         function register() {
             const u = document.getElementById('rUser').value;
             const e = document.getElementById('rEmail').value;
-            const ph = document.getElementById('rPhone').value;
             const p = document.getElementById('rPass').value;
             const pc = document.getElementById('rPassConfirm').value;
-
-            if(!u || !e || !ph || !p) return alert("Please fill all fields");
+            if(!u || !e || !p) return alert("Please fill all fields");
             if(p !== pc) return alert("Passwords do not match!");
-
-            localStorage.setItem(`garuda_user_${e}`, JSON.stringify({ name: u, email: e, phone: ph, pass: p }));
-            alert("Registration Successful! Please login.");
-            showAuth('login');
+            localStorage.setItem(`garuda_user_${e}`, JSON.stringify({ name: u, email: e, pass: p }));
+            alert("Registration Successful!"); showAuth('login');
         }
 
         function login() {
